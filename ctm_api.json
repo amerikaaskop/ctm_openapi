@@ -1,0 +1,349 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Continuum API",
+      "version": "0.1",
+      "description": "A description of the Continuum API",
+      "contact": {
+        "name": "Rino",
+        "email": "rino.vandam@digital.ai"
+      }
+    },
+    "servers": [
+      {
+        "url": "http://54.209.208.115:8080/api",
+        "description": "QA Automation Server"
+      }
+    ],
+    "components": {
+      "securitySchemes": {
+        "ctm_token": {
+          "name": "Authorization",
+          "type": "apiKey",
+          "in": "header"
+        }
+      }
+    },
+    "paths": {
+      "/accept_webhook": {
+        "get": {
+          "summary": "Accepts a webhook and runs it",
+          "parameters": [
+            {
+              "schema": {
+                "type": "string"
+              },
+              "name": "handler",
+              "description": "name of a defined 'Webhook Handler' containing directives to apply to this payload",
+              "in": "query",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "description": "",
+                    "type": "object",
+                    "properties": {
+                      "ErrorCode": {
+                        "type": "string"
+                      },
+                      "ErrorDetail": {
+                        "type": "string"
+                      },
+                      "ErrorMessage": {
+                        "type": "string"
+                      },
+                      "Method": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "Response": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "ErrorCode",
+                      "ErrorDetail",
+                      "ErrorMessage",
+                      "Method",
+                      "Response"
+                    ]
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "description": "",
+                    "type": "object",
+                    "properties": {
+                      "ErrorCode": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "ErrorDetail": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "ErrorMessage": {
+                        "type": "string"
+                      },
+                      "Method": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "Response": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "ErrorCode",
+                      "ErrorDetail",
+                      "ErrorMessage",
+                      "Method",
+                      "Response"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "description": "Accepts any JSON payload submitted, and runs it through the defined list of Directives",
+          "operationId": "get_accept_webhook",
+          "tags": [
+            "webhook"
+          ],
+          "security": [
+            {
+              "ctm_token": []
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "anykey": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "anykey"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "/copy_project": {
+        "get": {
+          "summary": "copy_project",
+          "responses": {
+            "200": {
+              "description": "true",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "description": "",
+                    "type": "object",
+                    "properties": {
+                      "ErrorCode": {
+                        "type": "string"
+                      },
+                      "ErrorDetail": {
+                        "type": "string"
+                      },
+                      "ErrorMessage": {
+                        "type": "string"
+                      },
+                      "Method": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "Response": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "ErrorCode",
+                      "ErrorDetail",
+                      "ErrorMessage",
+                      "Method",
+                      "Response"
+                    ]
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Errors",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "description": "",
+                    "type": "object",
+                    "properties": {
+                      "ErrorCode": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "ErrorDetail": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "ErrorMessage": {
+                        "type": "string"
+                      },
+                      "Method": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "Response": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "ErrorCode",
+                      "ErrorDetail",
+                      "ErrorMessage",
+                      "Method",
+                      "Response"
+                    ]
+                  },
+                  "examples": {
+                    "example-1": {
+                      "value": {
+                        "ErrorCode": "string",
+                        "ErrorDetail": "string",
+                        "ErrorMessage": "string",
+                        "Method": "string",
+                        "Response": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "operationId": "get-copy_project",
+          "description": "Copy a Project",
+          "parameters": [
+            {
+              "schema": {
+                "type": "string"
+              },
+              "in": "query",
+              "name": "project",
+              "required": true,
+              "description": "the id or name of a Project"
+            },
+            {
+              "schema": {
+                "type": "string"
+              },
+              "in": "query",
+              "name": "newname",
+              "required": true,
+              "description": "a name for the new Project"
+            }
+          ],
+          "tags": [
+            "project"
+          ],
+          "security": [
+            {
+              "ctm_token": []
+            }
+          ]
+        }
+      },
+      "/create_package": {
+        "get": {
+          "summary": "create_package",
+          "tags": [],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              }
+            }
+          },
+          "operationId": "get-create_package",
+          "description": "Create a Package Definition",
+          "parameters": [
+            {
+              "schema": {
+                "type": "string"
+              },
+              "in": "query",
+              "name": "name",
+              "required": true,
+              "description": "the name of a Package"
+            },
+            {
+              "schema": {
+                "type": "string"
+              },
+              "in": "query",
+              "name": "team",
+              "required": true,
+              "description": "Team to which the Package Definition should belong"
+            },
+            {
+              "schema": {
+                "type": "string"
+              },
+              "in": "query",
+              "name": "description",
+              "description": "a description of the Package Definition"
+            },
+            {
+              "schema": {
+                "type": "string"
+              },
+              "in": "query",
+              "name": "progression",
+              "description": "a Progression to associate with the Package Definition"
+            }
+          ],
+          "security": [
+            {
+              "ctm_token": []
+            }
+          ]
+        }
+      }
+    },
+    "tags": [
+      {
+        "name": "webhook"
+      },
+      {
+        "name": "project"
+      }
+    ],
+    "security": [
+      {
+        "Token 559589e35fb284021f6aa2ca": []
+      }
+    ]
+  }
