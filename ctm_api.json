@@ -1,349 +1,1281 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "Continuum API",
-      "version": "0.1",
-      "description": "A description of the Continuum API",
-      "contact": {
-        "name": "Rino",
-        "email": "rino.vandam@digital.ai"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Continuum API",
+    "version": "0.1",
+    "description": "A description of the Continuum API",
+    "contact": {
+      "name": "Rino",
+      "email": "rino.vandam@digital.ai"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://54.209.208.115:8080/api",
+      "description": "QA Automation Server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ctm_token": {
+        "name": "Authorization",
+        "type": "apiKey",
+        "in": "header",
+        "description": ""
       }
     },
-    "servers": [
-      {
-        "url": "http://54.209.208.115:8080/api",
-        "description": "QA Automation Server"
-      }
-    ],
-    "components": {
-      "securitySchemes": {
-        "ctm_token": {
-          "name": "Authorization",
-          "type": "apiKey",
-          "in": "header"
-        }
-      }
-    },
-    "paths": {
-      "/accept_webhook": {
-        "get": {
-          "summary": "Accepts a webhook and runs it",
-          "parameters": [
-            {
-              "schema": {
-                "type": "string"
-              },
-              "name": "handler",
-              "description": "name of a defined 'Webhook Handler' containing directives to apply to this payload",
-              "in": "query",
-              "required": true
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "description": "",
-                    "type": "object",
-                    "properties": {
-                      "ErrorCode": {
-                        "type": "string"
-                      },
-                      "ErrorDetail": {
-                        "type": "string"
-                      },
-                      "ErrorMessage": {
-                        "type": "string"
-                      },
-                      "Method": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "Response": {
-                        "type": "string",
-                        "minLength": 1
-                      }
-                    },
-                    "required": [
-                      "ErrorCode",
-                      "ErrorDetail",
-                      "ErrorMessage",
-                      "Method",
-                      "Response"
-                    ]
-                  }
-                }
-              }
+    "parameters": {}
+  },
+  "paths": {
+    "/accept_webhook": {
+      "get": {
+        "summary": "Accepts a webhook and runs it",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
             },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "description": "",
-                    "type": "object",
-                    "properties": {
-                      "ErrorCode": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "ErrorDetail": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "ErrorMessage": {
-                        "type": "string"
-                      },
-                      "Method": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "Response": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "ErrorCode",
-                      "ErrorDetail",
-                      "ErrorMessage",
-                      "Method",
-                      "Response"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "description": "Accepts any JSON payload submitted, and runs it through the defined list of Directives",
-          "operationId": "get_accept_webhook",
-          "tags": [
-            "webhook"
-          ],
-          "security": [
-            {
-              "ctm_token": []
-            }
-          ],
-          "requestBody": {
+            "name": "handler",
+            "description": "name of a defined 'Webhook Handler' containing directives to apply to this payload",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "description": "",
                   "type": "object",
                   "properties": {
-                    "anykey": {
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
                       "type": "string",
                       "minLength": 1
                     }
                   },
                   "required": [
-                    "anykey"
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
                   ]
                 }
               }
             }
           }
-        }
-      },
-      "/copy_project": {
-        "get": {
-          "summary": "copy_project",
-          "responses": {
-            "200": {
-              "description": "true",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "description": "",
-                    "type": "object",
-                    "properties": {
-                      "ErrorCode": {
-                        "type": "string"
-                      },
-                      "ErrorDetail": {
-                        "type": "string"
-                      },
-                      "ErrorMessage": {
-                        "type": "string"
-                      },
-                      "Method": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "Response": {
-                        "type": "string",
-                        "minLength": 1
-                      }
-                    },
-                    "required": [
-                      "ErrorCode",
-                      "ErrorDetail",
-                      "ErrorMessage",
-                      "Method",
-                      "Response"
-                    ]
+        },
+        "description": "Accepts any JSON payload submitted, and runs it through the defined list of Directives",
+        "operationId": "get_accept_webhook",
+        "tags": [
+          "webhook"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
                   }
                 }
               }
-            },
-            "400": {
-              "description": "Errors",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "description": "",
-                    "type": "object",
-                    "properties": {
-                      "ErrorCode": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "ErrorDetail": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "ErrorMessage": {
-                        "type": "string"
-                      },
-                      "Method": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "Response": {
-                        "type": "string"
-                      }
+            }
+          }
+        }
+      }
+    },
+    "/copy_project": {
+      "get": {
+        "summary": "copy_project",
+        "responses": {
+          "200": {
+            "description": "true",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string"
                     },
-                    "required": [
-                      "ErrorCode",
-                      "ErrorDetail",
-                      "ErrorMessage",
-                      "Method",
-                      "Response"
-                    ]
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string",
+                      "minLength": 1
+                    }
                   },
-                  "examples": {
-                    "example-1": {
-                      "value": {
-                        "ErrorCode": "string",
-                        "ErrorDetail": "string",
-                        "ErrorMessage": "string",
-                        "Method": "string",
-                        "Response": "string"
-                      }
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "ErrorCode": "string",
+                      "ErrorDetail": "string",
+                      "ErrorMessage": "string",
+                      "Method": "string",
+                      "Response": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-copy_project",
+        "description": "Copy a Project",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "project",
+            "required": true,
+            "description": "the id or name of a Project"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "newname",
+            "required": true,
+            "description": "a name for the new Project"
+          }
+        ],
+        "tags": [
+          "project"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/create_package": {
+      "get": {
+        "summary": "create_package",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-create_package",
+        "description": "Create a Package Definition",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "name",
+            "required": true,
+            "description": "the name of a Package"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "team",
+            "required": true,
+            "description": "Team to which the Package Definition should belong"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "description",
+            "description": "a description of the Package Definition"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "progression",
+            "description": "a Progression to associate with the Package Definition"
+          }
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/add_cloud_keypair": {
+      "get": {
+        "summary": "Adds a Key Pair to a Cloud",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "ErrorCode": "string",
+                      "ErrorDetail": "string",
+                      "ErrorMessage": "string",
+                      "Method": "string",
+                      "Response": "string"
                     }
                   }
                 }
               }
             }
           },
-          "operationId": "get-copy_project",
-          "description": "Copy a Project",
-          "parameters": [
-            {
-              "schema": {
-                "type": "string"
-              },
-              "in": "query",
-              "name": "project",
-              "required": true,
-              "description": "the id or name of a Project"
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Method": {
+                      "type": "string"
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "ErrorCode": "string",
+                      "ErrorDetail": "string",
+                      "ErrorMessage": "string",
+                      "Method": "string",
+                      "Response": "string"
+                    }
+                  }
+                }
+              }
             },
-            {
+            "headers": {}
+          }
+        },
+        "operationId": "get-add_cloud_keypair",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "parameters": [],
+        "description": "Adds a Key Pair to a Cloud"
+      }
+    },
+    "/add_object_tag": {
+      "get": {
+        "summary": "Adds a security Tag to an object",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-add_object_tag",
+        "description": "Adds a security Tag to an object\n\nValid and currently implemented `object_type` values are\n* `User` = 1\n* `Asset` = 2\n* `Task` = 3\n* `Canvas Item` = 50",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tag",
+            "description": "The name of the Tag",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "object_id",
+            "description": "The ID of the object",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "50"
+              ]
+            },
+            "in": "query",
+            "name": "object_type",
+            "description": "The numeric type of the object"
+          }
+        ]
+      }
+    },
+    "/add_project_source": {
+      "get": {
+        "summary": "Marks a Project as a 'Source' Project",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-add_project_source",
+        "description": "Given a Project and an Origin this will mark a Project as a \"Source\" Project, mark the Origin as the Projects Changes from, and will return the webhook\n\nValid origin values and their definitions:\n- 'github' - GitHub Webhook\n- 'gitlab' - GitLab Webhook\n- 'ispw' - Compuware ISPW\n- 'tfsgit' - VSTS/TFS Git Webhook\n- 'tfvc' - VSTS/TFS TFVC Webhook\n- 'tfstfvs_soap' - VSTS/TFS 2013 SOAP Webhook\n- 'teamforgegit' - TeamForge Git Webhook\n- 'teamforgesvn' - TeamForge Subversion Webhook\n- 'bitbucket' - BitBucket Cloud Webhook\n- 'bitbucketserver' - BitBucket Server Webhook\n- 'other' - Continuum Format Webhook",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "project",
+            "description": "Name of the Project to alter",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "github",
+                "gitlab",
+                "ispw",
+                "tfsgit",
+                "tfvc",
+                "tfstfvs_soap",
+                "teamforgegit",
+                "teamforgesvn",
+                "bitbucket",
+                "bitbucketserver",
+                "other"
+              ]
+            },
+            "in": "query",
+            "name": "origin",
+            "description": "Name of the VCS to mark as the Projects 'Changes From' field",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "secret",
+            "description": "the 'Webhook Secret' (only for github origin)"
+          }
+        ]
+      }
+    },
+    "/add_team_user": {
+      "get": {
+        "summary": "Add a User to a Team",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-add_team_user",
+        "description": "Only a 'Team Administrator' can manage Team membership.  If the credentials used for this API call are not a Team Administrator for the specified Team, the call will not succeed.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "team",
+            "description": "Name or ID of the Team to change",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "user",
+            "description": "Name or ID of the User to add",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "team_role",
+            "description": "Name of the Role for new user to adopt on new team",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/associate_commits_to_v1_workitem": {
+      "get": {
+        "summary": "Associate commits to v1 workitem",
+        "tags": [
+          "Internal"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-associate_commits_to_v1_workitem",
+        "description": "Associate commits to v1 workitem",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "commit_shas",
+            "description": "a list of all the Changes to associate to a Workitem",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "associated_by",
+            "description": "User that made the association in Digital.ai Agility",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "workitem_number",
+            "description": "Workitem number from Digital.ai Agility",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "instance_url",
+            "description": "Digital.ai Agility instance url",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/build_stream": {
+      "get": {
+        "summary": "Gets all pipeline instances that a workitem participated in",
+        "tags": [
+          "Internal"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-build_stream",
+        "description": "Gets all pipeline instances that a workitem participated in",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "number",
+            "description": "a Workitem Identifier",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/cancel_pipelineinstance": {
+      "get": {
+        "summary": "Cancel a running Pipeline Instance",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "true"
+          }
+        },
+        "operationId": "get-cancel_pipelineinstance",
+        "description": "Cancel a running Pipeline Instance\nAll Pending or Processing statuses will be set to Canceled",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "pi",
+            "description": "The Name or ID of a Pipeline Instance",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/cancel_transformer_event": {
+      "get": {
+        "summary": "Cancel failed event",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-cancel_transformer_event",
+        "description": "Cancel failed event",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "inbound_id",
+            "description": "The inbound id of the failed event",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/check_transformer_data_map_name_exists": {
+      "get": {
+        "summary": "Check if a mapping name already exists",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "true\nfalse"
+          }
+        },
+        "operationId": "get-check_transformer_data_map_name_exists",
+        "description": "Check if a mapping name already exists",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "name",
+            "description": "The mapping name to be checked for existence",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/complete_activity": {
+      "get": {
+        "summary": "Complete an Activity",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        },
+        "operationId": "get-complete_activity",
+        "description": "Given a Phase, Package Name, Revision (or Full Version), and Activity Name - will complete that Activity with either 'success' or 'failure'",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "package",
+            "description": "Name of the Package to promote to a progression Phase",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "revision",
+            "description": "Revision number of a Package to promote, takes precedence over `full_version`",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "full_version",
+            "description": "Full Version of package to promote, optional alternative selector to `revision`",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "phase",
+            "description": "Name of the Phase containing the Activity to complete",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "activity",
+            "description": "Name of the Activity to complete",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "notes",
+            "description": "Notes to be attached to the Activity. (May be configured to be required.)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "failure",
+            "description": "Mark the Activity as a 'failure'.  (`success` if omitted.)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "forcewith",
+            "description": "Force completion by setting all Controls to `pass` or `fail`"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": " * Will default to start time if earlier time is provided.     * Will assume UTC if no tz offset provided and nothing passed to 'timezone' argument.     * iso8601 or YYYY-MM-DD-HH:mm:SS format preferred"
+            },
+            "in": "query",
+            "name": "completion_time",
+            "description": "Mark the activity complete at a specified time"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "* This will allow for the conversion to UTC if completion_time is not UTC.     * Format such as \"Europe/Lisbon\" or \"US/Eastern\"     * If timezone is provided, but the 'completion_time' contains an offset, timezone will be ignored."
+            },
+            "in": "query",
+            "name": "timezone",
+            "description": "Optional modifier for 'completion_time'"
+          }
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/configure_plugin": {
+      "post": {
+        "summary": "Configure a specific Flow Plugin",
+        "operationId": "post-configure_plugin",
+        "requestBody": {
+          "content": {
+            "application/json": {
               "schema": {
-                "type": "string"
-              },
-              "in": "query",
-              "name": "newname",
-              "required": true,
-              "description": "a name for the new Project"
-            }
-          ],
-          "tags": [
-            "project"
-          ],
-          "security": [
-            {
-              "ctm_token": []
-            }
-          ]
-        }
-      },
-      "/create_package": {
-        "get": {
-          "summary": "create_package",
-          "tags": [],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "plugin": {
                     "type": "object",
-                    "properties": {}
+                    "properties": {
+                      "_plugin": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "_enabled": {
+                        "type": "boolean"
+                      },
+                      "instances": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "minItems": 1,
+                        "items": {
+                          "required": [],
+                          "properties": {}
+                        }
+                      },
+                      "team": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "_plugin",
+                      "_enabled",
+                      "instances",
+                      "team"
+                    ]
+                  }
+                },
+                "required": [
+                  "plugin"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": "The following keys will be encrypted if provided: `api_token`, `password`.\nNOTE:  This is a destructive operation!  Configuring a plugin's instances will replace all previous configured instances for the given team.  If no team is specified, all global instances of the plugin will be replaced with the new configuration instead.  If you wish to reconfigure any one particular instance of the plugin, see 'configure_plugin_instance'."
+      }
+    },
+    "/configure_plugin_instance": {
+      "post": {
+        "summary": "Add a new instance for a particular plugin type",
+        "operationId": "post-configure_plugin_instance",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Add a new instance for a particular plugin type. \nNote: does not overwrite existing instances.\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "plugin": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "url": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "token": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "owner": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "is_default": {
+                    "type": "boolean"
+                  },
+                  "team": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "plugin",
+                  "name"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/configure_plugins": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-configure_plugins"
+      }
+    },
+    "/create_account": {
+      "get": {
+        "summary": "Creates a Cloud Account",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Method": {
+                      "type": "string"
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                }
+              }
+            }
+          },
+          "280": {
+            "description": ""
+          }
+        },
+        "operationId": "get-create_account",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "name",
+            "description": "a name for the new Account",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "provider",
+            "description": "one of the valid cloud providers",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "login",
+            "description": "the login id (access key) for this Account",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "password",
+            "description": "a password (secret key) for this Account",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "default_cloud",
+            "description": "the name of a default Cloud for this Account",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "account_number",
+            "description": "an Account number"
+          }
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/create_asset": {
+      "post": {
+        "summary": "Creates an Asset",
+        "operationId": "post-create_asset",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "description": "Creates an Asset\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "a name for the new Asset"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "either 'Active' or 'Inactive'. ('Active' if omitted.)"
+                  },
+                  "db_name": {
+                    "type": "string",
+                    "description": "a Database name"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "the network address of the Asset"
+                  },
+                  "port": {
+                    "type": "string",
+                    "description": "a service port for the Address"
+                  },
+                  "conn_string": {
+                    "type": "string",
+                    "description": "some Assets make their connections via an explicit connection string"
+                  },
+                  "user": {
+                    "type": "string",
+                    "description": "a User ID to associate with this Asset"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "a Password to associate with this Asset"
+                  },
+                  "shared_credential": {
+                    "type": "string",
+                    "description": "the name of a Shared Credential to use"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "name": "string",
+                    "status": "string",
+                    "db_name": "string",
+                    "address": "string",
+                    "port": "string",
+                    "conn_string": "string",
+                    "user": "string",
+                    "password": "string",
+                    "shared_credential": "string"
                   }
                 }
               }
             }
           },
-          "operationId": "get-create_package",
-          "description": "Create a Package Definition",
-          "parameters": [
-            {
-              "schema": {
-                "type": "string"
-              },
-              "in": "query",
-              "name": "name",
-              "required": true,
-              "description": "the name of a Package"
-            },
-            {
-              "schema": {
-                "type": "string"
-              },
-              "in": "query",
-              "name": "team",
-              "required": true,
-              "description": "Team to which the Package Definition should belong"
-            },
-            {
-              "schema": {
-                "type": "string"
-              },
-              "in": "query",
-              "name": "description",
-              "description": "a description of the Package Definition"
-            },
-            {
-              "schema": {
-                "type": "string"
-              },
-              "in": "query",
-              "name": "progression",
-              "description": "a Progression to associate with the Package Definition"
-            }
-          ],
-          "security": [
-            {
-              "ctm_token": []
-            }
-          ]
-        }
+          "description": "Regarding Credentials:\n\nCredentials are optional on an Asset, however if provided there are rules.\nExplicit details can be associated with *only this Asset*, or a Shared Credential can be specified.\n\nThe minimum required to create a LOCAL set of credentials on this Asset are:\n\n* `user` - a User ID for the Credential\n* `password` - a Password for the Credential\n\nTo specify a Shared Credential, provide the `shared_credential` argument, which is the name of an existing Credential.\n"
+        },
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
       }
+    }
+  },
+  "tags": [
+    {
+      "name": "webhook"
     },
-    "tags": [
-      {
-        "name": "webhook"
-      },
-      {
-        "name": "project"
-      }
-    ],
-    "security": [
-      {
-        "Token 559589e35fb284021f6aa2ca": []
-      }
-    ]
-  }
+    {
+      "name": "project"
+    },
+    {
+      "name": "Internal"
+    }
+  ],
+  "security": [
+    {
+      "Token 559589e35fb284021f6aa2ca": []
+    }
+  ]
+}
