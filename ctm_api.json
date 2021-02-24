@@ -2695,6 +2695,1640 @@
           "ToDo"
         ]
       }
+    },
+    "/edit_email_configuration": {
+      "post": {
+        "summary": "Configure email notification",
+        "operationId": "post-edit_email_configuration",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Configure email notification for the data map\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The id of the data map"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/export_canvas": {
+      "post": {
+        "summary": "Exports a document with all Canvas items",
+        "operationId": "post-export_canvas",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Generates an export JSON document all Canvas items.\n\nThis function is capable of exporting items from the \"filesystem\" repository, which is an administrative feature.\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "project": {
+                    "type": "string",
+                    "description": "filter by a Canvas Project name"
+                  },
+                  "component": {
+                    "type": "string",
+                    "description": "filter by a Canvas Component. (Project is required)"
+                  },
+                  "repository": {
+                    "type": "string",
+                    "description": "specify the repository ('file' or 'db', 'db' if omitted)"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/export_catalog": {
+      "post": {
+        "summary": "Export Catalog",
+        "operationId": "post-export_catalog",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Export all Project, Pipeline, Package, and Task definitions to a catalog as a JSON document\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/export_package": {
+      "post": {
+        "summary": "Export a Package Definition",
+        "operationId": "post-export_package",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Export a Package Definition as a portable backup JSON document\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package": {
+                    "type": "string",
+                    "description": "the id or name of a Package"
+                  }
+                },
+                "required": [
+                  "package"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/export_pipeline": {
+      "post": {
+        "summary": "Export a Pipeline Definition",
+        "operationId": "post-export_pipeline",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Export a Pipeline Definition as a portable backup JSON document\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pipeline": {
+                    "type": "string",
+                    "description": "the id or name of a Pipeline Definition"
+                  }
+                },
+                "required": [
+                  "pipeline"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/export_plugins": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [
+          "ToDo"
+        ],
+        "responses": {},
+        "operationId": "get-export_plugins",
+        "description": "ToDo: currently no documentation in /api at all for this path"
+      }
+    },
+    "/export_progression": {
+      "post": {
+        "summary": "Export a Progression Definition",
+        "operationId": "post-export_progression",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Export a Progression Definition as a portable backup JSON document\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "progression": {
+                    "type": "string",
+                    "description": "the id or name of a Progression"
+                  }
+                },
+                "required": [
+                  "progression"
+                ]
+              }
+            }
+          },
+          "description": ""
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/export_project": {
+      "post": {
+        "summary": "Gets a Project object for export",
+        "operationId": "post-export_project",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets a Project object for export.  (Will not include the `_id`)\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "project": {
+                    "type": "string",
+                    "description": "the id or name of a Project"
+                  }
+                },
+                "required": [
+                  "project"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/export_task": {
+      "post": {
+        "summary": "Create a backup file for a single Task",
+        "operationId": "post-export_task",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Create a backup file for a single Task\n\nToDo: responses\n",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "task": {
+                    "type": "string",
+                    "description": "Value can be either a Task ID, Code or Name"
+                  },
+                  "include_refs": {
+                    "type": "boolean",
+                    "description": "If true, will analyze each task and include any referenced Tasks"
+                  }
+                },
+                "required": [
+                  "task"
+                ]
+              }
+            }
+          },
+          "description": "The behavior of this command is different depending on the `Accept` header.\n\n- If 'application/json' (default), it will return a JSON list of individual Task documents\n- If 'application/xml' OR 'text/plain', it will return an XML document of Tasks"
+        }
+      }
+    },
+    "/get_account": {
+      "post": {
+        "summary": "Gets a Cloud Account",
+        "operationId": "post-get_account",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets a Cloud Account\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": " a Cloud Account name or ID"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_asset": {
+      "post": {
+        "summary": "Gets an Asset",
+        "operationId": "post-get_asset",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets an Asset\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "asset": {
+                    "type": "string",
+                    "description": "an Asset Name or ID"
+                  }
+                },
+                "required": [
+                  "asset"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_cloud": {
+      "post": {
+        "summary": "Gets a Cloud object",
+        "operationId": "post-get_cloud",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets a Cloud object\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "a Cloud name or ID"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_data_map": {
+      "get": {
+        "summary": "Gets list of data mappings",
+        "tags": [
+          "ToDo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-get_data_map",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "mapping_id": {
+                    "type": "string",
+                    "description": "data mapping to return"
+                  }
+                }
+              }
+            }
+          },
+          "description": "If no 'mapping_id' is supplied, return all mappings"
+        },
+        "description": "Gets list of data mappings\n\nToDo: responses"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-get_data_map",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/get_feature_deliverycategory": {
+      "post": {
+        "summary": "Get the `effective delivery category` for a feature",
+        "operationId": "post-get_feature_deliverycategory",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Get the `effective delivery category` for a feature, as determined by the condition of all that features workitems\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The internal `_id` OR the authoritative `ID` from the origin system OR the `key` (user facing identifier) from the origin system"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_license": {
+      "post": {
+        "summary": "Gets the license details",
+        "operationId": "post-get_license",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets the license details\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "license": {
+                    "type": "string",
+                    "description": "The text of a license key provided by Continuum"
+                  }
+                },
+                "required": [
+                  "license"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_log": {
+      "post": {
+        "summary": "Gets the log for a specific service or automation instance",
+        "operationId": "post-get_log",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets the log for a specific service or automation instance\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "process": {
+                    "type": "string",
+                    "description": "the name of the process of the log to retrieve"
+                  },
+                  "instance": {
+                    "type": "string",
+                    "description": "If process represents instanced data (such as pipelines or tasks), the `instance` is also required"
+                  },
+                  "lines": {
+                    "type": "string",
+                    "description": "The number of log lines to retrieve.  (An integer, or the word `all`.  100 lines if omitted)"
+                  },
+                  "level": {
+                    "type": "string",
+                    "description": "Filter lines to a specific debug logging level _and higher_.  Default is all levels.  (Valid values: 10 (DEBUG), 20 (INFO), 30 (WARNING), 40 (ERROR), 50 (CRITICAL))"
+                  },
+                  "concatenate": {
+                    "type": "string",
+                    "description": "Concatenate log lines into a single text value.  Default is 'false' - returning an array of rows - if omitted. (Valid values: 'true' or 'false')"
+                  }
+                },
+                "required": [
+                  "process"
+                ]
+              }
+            }
+          },
+          "description": "NOTE: specifying `lines=all` can return a very large amount of data"
+        }
+      }
+    },
+    "/get_mappings_for_relationship": {
+      "parameters": [],
+      "post": {
+        "summary": "Gets all the available data maps for given instances",
+        "operationId": "post-get_mappings_for_relationship",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets all the available data maps for given instances",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "inbound_instance": {
+                    "type": "string",
+                    "description": "The system 1 instance id"
+                  },
+                  "outbound_instance": {
+                    "type": "string",
+                    "description": "The system 2 instance id"
+                  },
+                  "mappingId": {
+                    "type": "string",
+                    "description": "Id of current data map"
+                  }
+                },
+                "required": [
+                  "inbound_instance",
+                  "outbound_instance",
+                  "mappingId"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_next_id": {
+      "post": {
+        "summary": "Get the next integer `id` in a named ID set",
+        "operationId": "post-get_next_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Get the next integer `id` in a named ID set\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "the name of the ID set"
+                  },
+                  "reseed": {
+                    "type": "integer",
+                    "description": "If provided, reset the pool to the specified value.  (This is the value that will be returned.)"
+                  },
+                  "fallback": {
+                    "type": "integer",
+                    "description": "In the case of any errors, the provided `fallback` number will be returned. `0` if omitted"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_package": {
+      "post": {
+        "summary": "Returns the definition of the specified Package",
+        "operationId": "post-get_package",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns the definition of the specified Package\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package": {
+                    "type": "string",
+                    "description": "Name of the Package"
+                  }
+                },
+                "required": [
+                  "package"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_package_activities": {
+      "post": {
+        "summary": "Lists Activities for a Package",
+        "operationId": "post-get_package_activities",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Lists Activities for a Package\n\nToDo: responses",
+        "tags": [
+          "ToDo",
+          "Internal"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package": {
+                    "type": "string",
+                    "description": "Name of the Package for which to retrieve Activities"
+                  },
+                  "activity_type": {
+                    "type": "string",
+                    "description": "The type of Activities to retrieve. Will retrieve all if omitted",
+                    "enum": [
+                      "manual_activity",
+                      "initiate_pipeline"
+                    ]
+                  },
+                  "activity_status": {
+                    "type": "string",
+                    "description": "The status of Activities to retrieve. will retrieve all if omitted",
+                    "enum": [
+                      "pending",
+                      "success",
+                      "failure"
+                    ]
+                  }
+                },
+                "required": [
+                  "package"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_package_manifest": {
+      "post": {
+        "summary": "Returns the complete Manifest of a Package Version",
+        "operationId": "post-get_package_manifest",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns the complete Manifest of a Package Version, given a range of Revisions\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package": {
+                    "type": "string",
+                    "description": "Name of the Package"
+                  },
+                  "version": {
+                    "type": "string",
+                    "description": "Version of the Package"
+                  },
+                  "version_of_rev": {
+                    "type": "string",
+                    "description": "(integer) A specific Revision. If provided, discover and use the Version of this specific Revision"
+                  }
+                },
+                "required": [
+                  "package"
+                ]
+              }
+            }
+          },
+          "description": "Use either `version` or `version_of_rev`. If both `version` and `version_of_rev` are provided, `version` takes precedence."
+        }
+      }
+    },
+    "/get_package_revision_manifest": {
+      "post": {
+        "summary": "Returns the complete Manifest of a Package Version",
+        "operationId": "post-get_package_revision_manifest",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns the complete Manifest of a Package Version, given a range of Revisions\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package": {
+                    "type": "string",
+                    "description": "Name of the Package"
+                  },
+                  "revision": {
+                    "type": "string",
+                    "description": "A specific Package Revision"
+                  },
+                  "verbose": {
+                    "type": "boolean",
+                    "description": "Return verbose Manifest details. `false` if omitted"
+                  }
+                },
+                "required": [
+                  "package",
+                  "revision"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_package_revision_phase_doc": {
+      "post": {
+        "summary": "Creates a new Revision of a specified Version of a Package",
+        "operationId": "post-get_package_revision_phase_doc",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Creates a new Revision of a specified Version of a Package\n\nToDo: description seems wrong?  should probably be \"Returns: Data about the current Revisions relationships in its Progression\"?\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package": {
+                    "type": "string",
+                    "description": "Name of the Package"
+                  },
+                  "revision": {
+                    "type": "string",
+                    "description": "A specific Package Revision"
+                  }
+                },
+                "required": [
+                  "package",
+                  "revision"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_package_revision_progression": {
+      "post": {
+        "summary": "Returns the Progression definition for a specific Package Revision",
+        "operationId": "post-get_package_revision_progression",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns the Progression definition for a specific Package Revision.  (Name, Phase names and order, etc.)\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package": {
+                    "type": "string",
+                    "description": "Name of the Package"
+                  },
+                  "revision": {
+                    "type": "string",
+                    "description": "A specific Package Revision"
+                  }
+                },
+                "required": [
+                  "package",
+                  "revision"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_pi_artifacts": {
+      "post": {
+        "summary": "Gets the Changes from the Manifest of a Pipeline Instance",
+        "operationId": "post-get_pi_artifacts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets the Changes from the Manifest of a Pipeline Instance\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pi": {
+                    "type": "string",
+                    "description": "the id or name of a Pipeline Instance"
+                  }
+                },
+                "required": [
+                  "pi"
+                ]
+              }
+            }
+          },
+          "description": "Note: the response is 'json' - 'text' and 'xml' object_output options are not supporte"
+        }
+      }
+    },
+    "/get_pi_changes": {
+      "post": {
+        "summary": "Gets the Changes from the Manifest of a Pipeline Instance",
+        "operationId": "post-get_pi_changes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets the Changes from the Manifest of a Pipeline Instance\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pi": {
+                    "type": "string",
+                    "description": "the id or name of a Pipeline Instance"
+                  }
+                },
+                "required": [
+                  "pi"
+                ]
+              }
+            }
+          },
+          "description": "Note: the response is 'json' - 'text' and 'xml' object_output options are not supported"
+        }
+      }
+    },
+    "/get_pi_data": {
+      "post": {
+        "summary": "Gets a Pipeline Instance Data object",
+        "operationId": "post-get_pi_data",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets a Pipeline Instance Data object\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pi": {
+                    "type": "string",
+                    "description": "the id or name of a Pipeline Instance"
+                  },
+                  "lookup": {
+                    "type": "string",
+                    "description": "Lookup using an expression that evaluates to a subsection of the document"
+                  }
+                },
+                "required": [
+                  "pi"
+                ]
+              }
+            }
+          },
+          "description": "Note: the response is 'json' - 'text' and 'xml' object_output options are not supported"
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_pi_workitems": {
+      "post": {
+        "summary": "Gets the Workitems from the Manifest of a Pipeline Instance",
+        "operationId": "post-get_pi_workitems",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pi": {
+                    "type": "string",
+                    "description": "the id or name of a Pipeline Instance"
+                  }
+                },
+                "required": [
+                  "pi"
+                ]
+              }
+            }
+          },
+          "description": "Note: the response is 'json' - 'text' and 'xml' object_output options are not supported."
+        },
+        "description": "Gets the Workitems from the Manifest of a Pipeline Instance\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_pipeline": {
+      "post": {
+        "summary": "Gets a Pipeline Definition object",
+        "operationId": "post-get_pipeline",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets a Pipeline Definition object\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pipeline": {
+                    "type": "string",
+                    "description": "the id or name of a Pipeline Definition"
+                  }
+                },
+                "required": [
+                  "pipeline"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_pipelineinstance": {
+      "post": {
+        "summary": "Gets a Pipeline Instance object",
+        "operationId": "post-get_pipelineinstance",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets a Pipeline Instance object\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pi": {
+                    "type": "string",
+                    "description": "the id or name of a Pipeline Instance"
+                  },
+                  "include_stages": {
+                    "type": "string",
+                    "description": "include Stage, Step and Plugin data and status"
+                  }
+                },
+                "required": [
+                  "pi"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_plugin_schema": {
+      "post": {
+        "summary": "Returns the Schema for a given plugin",
+        "operationId": "post-get_plugin_schema",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns the Schema for a given plugin\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plugin_name": {
+                    "type": "string",
+                    "description": "The name of the plugin to be returned"
+                  }
+                },
+                "required": [
+                  "plugin_name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_progression_details": {
+      "post": {
+        "summary": "Gets details about a Progression",
+        "operationId": "post-get_progression_details",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets details about a Progression suitable for populating the display of a Progression Board\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "progression": {
+                    "type": "string",
+                    "description": "the id or name of a Progression"
+                  },
+                  "packages": {
+                    "type": "string",
+                    "description": "a comma-delimited list of Package ids to include in the results. If not provided, all readable packages will be selected"
+                  },
+                  "teams": {
+                    "type": "string",
+                    "description": "a comma-delimited list of Package ids/names to include in the results. If not provided, all teams associated with the API user will be selected"
+                  }
+                },
+                "required": [
+                  "progression"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_project": {
+      "post": {
+        "summary": "Returns a Project object",
+        "operationId": "post-get_project",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns a Project object\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "project": {
+                    "type": "string",
+                    "description": "the id or name of a Project"
+                  }
+                },
+                "required": [
+                  "project"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_project_changes": {
+      "post": {
+        "summary": "Returns all the changes submitted to a Project",
+        "operationId": "post-get_project_changes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns all the changes submitted to a Project\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "project": {
+                    "type": "string",
+                    "description": "the id or name of a Project"
+                  }
+                },
+                "required": [
+                  "project"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_registry": {
+      "post": {
+        "summary": "Gets a registry document by name",
+        "operationId": "post-get_registry",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets a registry document by name\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the Registry document"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_settings": {
+      "post": {
+        "summary": "Lists all the settings of modules",
+        "operationId": "post-get_settings",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Lists all the settings of modules\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "module": {
+                    "type": "string",
+                    "description": "name of the module. If omitted, all module settings are returned"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_submission": {
+      "post": {
+        "summary": "Gets a raw 'Submission' payload using a query",
+        "operationId": "post-get_submission",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets a raw 'Submission' payload using a query",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "Valid MongoDB query to identify the previous payload to resubmit"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          },
+          "description": "Note: if the query would return multiple submissions, the newest one is matched"
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_system_log": {
+      "post": {
+        "summary": "Gets the system log",
+        "operationId": "post-get_system_log",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets the system log\nIf all arguments are omitted, will return the most recent 100 entries\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "object_id": {
+                    "type": "string",
+                    "description": "An object_id filter to limit the results"
+                  },
+                  "object_type": {
+                    "type": "string",
+                    "description": "An object_type filter to limit the results"
+                  },
+                  "log_type": {
+                    "type": "string",
+                    "description": "A log_type filte",
+                    "enum": [
+                      "Security",
+                      "Object"
+                    ]
+                  },
+                  "action": {
+                    "type": "string",
+                    "description": "An action filter"
+                  },
+                  "filter": {
+                    "type": "string",
+                    "description": "A filter to limit the results"
+                  },
+                  "from": {
+                    "type": "string",
+                    "description": "a date string to set as the \"from\" marker. (mm/dd/yyyy format)"
+                  },
+                  "to": {
+                    "type": "string",
+                    "description": " a date string to set as the \"to\" marker. (mm/dd/yyyy format)"
+                  },
+                  "records": {
+                    "type": "string",
+                    "description": "a maximum number of results to get"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_task": {
+      "post": {
+        "summary": "Returns a Task object",
+        "operationId": "post-get_task",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns a Task object\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "task": {
+                    "type": "string",
+                    "description": "Value can be either a Task ID or Name"
+                  },
+                  "include_code": {
+                    "type": "boolean",
+                    "description": "Whether to include Codeblocks and Steps.  (Only included if 'output_format' is 'json' or 'xml'.  'False' if omitted.)"
+                  }
+                },
+                "required": [
+                  "task"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_task_instance": {
+      "post": {
+        "summary": "Returns the details of a Task Instance",
+        "operationId": "post-get_task_instance",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns the details of a Task Instance\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "instance": {
+                    "type": "string",
+                    "description": "The Task Instance identifier"
+                  }
+                },
+                "required": [
+                  "instance"
+                ]
+              }
+            }
+          }
+        }
+      }
     }
   },
   "tags": [
