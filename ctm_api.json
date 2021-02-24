@@ -4324,8 +4324,231 @@
                 "required": [
                   "instance"
                 ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "instance": "string"
+                  }
+                }
               }
             }
+          }
+        }
+      }
+    },
+    "/get_task_instance_status": {
+      "post": {
+        "summary": "Returns the Status of a Task Instance",
+        "operationId": "post-get_task_instance_status",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns the Status of a Task Instance\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "instance": {
+                    "type": "string",
+                    "description": "The Task Instance identifier"
+                  }
+                },
+                "required": [
+                  "instance"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_task_instances": {
+      "post": {
+        "summary": "Returns a list of Task Instances",
+        "operationId": "post-get_task_instances",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Returns a list of Task Instances\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "A filter to limit the results"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "A comma separated list of statuses to filter the results"
+                  },
+                  "from": {
+                    "type": "string",
+                    "description": "a date string to set as the \"from\" marker. (mm/dd/yyyy format)"
+                  },
+                  "to": {
+                    "type": "string",
+                    "description": "a date string to set as the \"to\" marker. (mm/dd/yyyy format)"
+                  },
+                  "records": {
+                    "type": "string",
+                    "description": "a maximum number of results to get"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_task_log": {
+      "post": {
+        "summary": "Returns the run log for a Task Instance",
+        "operationId": "post-get_task_log",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns the run log for a Task Instance\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "instance": {
+                    "type": "string",
+                    "description": "The Task Instance identifier"
+                  }
+                },
+                "required": [
+                  "instance"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_task_parameters": {
+      "post": {
+        "summary": "Returns a Parameters template for a Task",
+        "operationId": "post-get_task_parameters",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns a Parameters template for a Task\n\nToDo: the basic parameter description seems to conflict with the description in the body section?\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "task": {
+                    "type": "string",
+                    "description": "Value can be either a Task ID, Code or Name"
+                  },
+                  "basic": {
+                    "type": "boolean",
+                    "description": "in JSON mode, if provided, will omit descriptive details"
+                  }
+                },
+                "required": [
+                  "task"
+                ]
+              }
+            }
+          },
+          "description": "This function is not affected by the output_format option.  The Response is always an XML document"
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_task_plans": {
+      "post": {
+        "summary": "",
+        "operationId": "post-get_task_plans",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "summary": "Returns a list of the queued execution plans for a Task",
+        "description": "Returns a list of the queued execution plans for a Task\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "task": {
+                    "type": "string",
+                    "description": "a Task ID or Name"
+                  }
+                },
+                "required": [
+                  "task"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
