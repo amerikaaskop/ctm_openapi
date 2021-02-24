@@ -4509,16 +4509,13 @@
     },
     "/get_task_plans": {
       "post": {
-        "summary": "",
+        "summary": "Returns a list of the queued execution plans for a Task",
         "operationId": "post-get_task_plans",
         "responses": {
           "200": {
             "description": "OK"
           }
-        }
-      },
-      "get": {
-        "summary": "Returns a list of the queued execution plans for a Task",
+        },
         "description": "Returns a list of the queued execution plans for a Task\n\nToDo: responses",
         "tags": [
           "ToDo"
@@ -4536,7 +4533,7 @@
                 "properties": {
                   "task": {
                     "type": "string",
-                    "description": "a Task ID or Name"
+                    "description": "Value can be either a Task ID or Name"
                   }
                 },
                 "required": [
@@ -4545,10 +4542,551 @@
               }
             }
           }
-        },
+        }
+      }
+    },
+    "/get_task_schedules": {
+      "post": {
+        "summary": "Returns a list of Schedule definitions for a Task",
+        "operationId": "post-get_task_schedules",
         "responses": {
           "200": {
             "description": "OK"
+          }
+        },
+        "description": "Returns a list of Schedule definitions for a Task\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "task": {
+                    "type": "string",
+                    "description": "Value can be either a Task ID or Name"
+                  }
+                },
+                "required": [
+                  "task"
+                ]
+              }
+            }
+          },
+          "description": "* Text results do not include timing details.\n* JSON results include Schedule definitions suitable for use in the 'schedule_task' function."
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_token": {
+      "post": {
+        "summary": "Returns an authentication token",
+        "operationId": "post-get_token",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns an authentication token for the API\nA token is the preferred alternative to 'Basic' authorization\n\nThis function requires Basic authorization to be enabled.\nPass an `Authorization` header of type `Basic` to retrieve your Token.\nIf a token doesn't exist for the authenticated User, this method will generate a new token.\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_transformer_assets": {
+      "post": {
+        "summary": "Returns all asset types in the selected transformer plugin instance",
+        "operationId": "post-get_transformer_assets",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Returns all asset types for the selected project in the selected transformer plugin instance\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plugin_id": {
+                    "type": "string",
+                    "description": "The id of the plugin"
+                  },
+                  "instance_id": {
+                    "type": "string",
+                    "description": "The id of the instance of the plugin"
+                  },
+                  "project_id": {
+                    "type": "string",
+                    "description": "The id of the selected project"
+                  }
+                },
+                "required": [
+                  "plugin_id",
+                  "instance_id",
+                  "project_id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_transformer_automap": {
+      "post": {
+        "summary": "Returns a data map for automapped fields",
+        "operationId": "post-get_transformer_automap",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Returns a data map for automapped fields\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "source_field_id": {
+                    "type": "string",
+                    "description": "The field id of the source system"
+                  },
+                  "target_field_id": {
+                    "type": "string",
+                    "description": "The field id of the target system"
+                  }
+                },
+                "required": [
+                  "source_field_id",
+                  "target_field_id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_transformer_data_map": {
+      "post": {
+        "summary": "Returns a data map for listing",
+        "operationId": "post-get_transformer_data_map",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Returns a data map for listing\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The id of the data map to be retrieved"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_transformer_data_map_all_sync_log": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-get_transformer_data_map_all_sync_log"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-get_transformer_data_map_all_sync_log",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/get_transformer_data_map_sync_log_by_inbound": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-get_transformer_data_map_sync_log_by_inbound"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-get_transformer_data_map_sync_log_by_inbound",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/get_transformer_data_maps": {
+      "post": {
+        "summary": "Gets all the available data maps",
+        "operationId": "post-get_transformer_data_maps",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets all the available data maps\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/get_transformer_datamap_for_edit": {
+      "post": {
+        "summary": "Gets a data map for editing",
+        "operationId": "post-get_transformer_datamap_for_edit",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The id of the data map to be retrieved"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "description": "Gets a data map for editing\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_transformer_fields": {
+      "post": {
+        "summary": "Gets all asset types in the selected transformer plugin instance",
+        "operationId": "post-get_transformer_fields",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets all asset types for the selected project in the selected transformer plugin instance\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plugin_id": {
+                    "type": "string",
+                    "description": "The id of the plugin"
+                  },
+                  "instance_id": {
+                    "type": "string",
+                    "description": "The id of the instance of the plugin"
+                  },
+                  "project_id": {
+                    "type": "string",
+                    "description": "The id of the selected project"
+                  },
+                  "project_name": {
+                    "type": "string",
+                    "description": "The name of the selected project"
+                  },
+                  "tracker_id": {
+                    "type": "string",
+                    "description": "The id of the selected tracker. (Mandatory for TF)"
+                  },
+                  "tracker_name": {
+                    "type": "string",
+                    "description": "The name of the selected tracker. (Mandatory for TF)"
+                  },
+                  "issuetype_id": {
+                    "type": "string",
+                    "description": "The id of the selected issyuetype. (Mandatory for Jira)"
+                  },
+                  "issuetype_name": {
+                    "type": "string",
+                    "description": "The name of the selected issyuetype. (Mandatory for Jira)"
+                  },
+                  "asset_type_id": {
+                    "type": "string",
+                    "description": "The id of the selected asset type. (Mandatory for V1)"
+                  },
+                  "asset_type": {
+                    "type": "string",
+                    "description": "The name of the selected asset type. (Mandatory for V1)"
+                  },
+                  "workitemtype_id": {
+                    "type": "string",
+                    "description": "The id of the selected workitem type. (Mandatory for Azure Devops)"
+                  },
+                  "workitemtype_name": {
+                    "type": "string",
+                    "description": "The name of the selected workitem type. (Mandatory for Azure Devops)"
+                  }
+                },
+                "required": [
+                  "plugin_id",
+                  "instance_id",
+                  "project_id",
+                  "project_name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_transformer_fields_for_create": {
+      "post": {
+        "summary": "Gets all asset types for the 2 selected transformer plugin instances",
+        "operationId": "post-get_transformer_fields_for_create",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets all asset types for the selected project for the 2 selected transformer plugin instances\n\nToDo: responses\nToDo: asset_type (last argument in asset object) seems incomplete - should be asset_type_name)?",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "system_1": {
+                    "type": "object",
+                    "description": "Details of the first plugin instance",
+                    "required": [
+                      "plugin_id",
+                      "instance_id",
+                      "asset"
+                    ],
+                    "properties": {
+                      "plugin_id": {
+                        "type": "string",
+                        "description": "The id of the plugin"
+                      },
+                      "instance_id": {
+                        "type": "string",
+                        "description": "The id of the instance of the plugin"
+                      },
+                      "asset": {
+                        "type": "object",
+                        "required": [
+                          "project_id",
+                          "project_name"
+                        ],
+                        "properties": {
+                          "project_id": {
+                            "type": "string",
+                            "description": "The id of the selected project"
+                          },
+                          "project_name": {
+                            "type": "string",
+                            "description": "The name of the selected project"
+                          },
+                          "tracker_id": {
+                            "type": "string",
+                            "description": "The id of the selected tracker. (Mandatory for TF)"
+                          },
+                          "tracker_name": {
+                            "type": "string",
+                            "description": "The name of the selected tracker. (Mandatory for TF)"
+                          },
+                          "issuetype_id": {
+                            "type": "string",
+                            "description": "The id of the selected issyuetype. (Mandatory for Jira)"
+                          },
+                          "issuetype_name": {
+                            "type": "string",
+                            "description": "The name of the selected issyuetype. (Mandatory for Jira)"
+                          },
+                          "asset_type_id": {
+                            "type": "string",
+                            "description": "The id of the selected asset type. (Mandatory for V1)"
+                          },
+                          "asset_type": {
+                            "type": "string",
+                            "description": "The name of the selected asset type. (Mandatory for V1)"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "system_2": {
+                    "type": "object",
+                    "description": "Details of the second plugin instance",
+                    "required": [
+                      "plugin_id",
+                      "instance_id",
+                      "asset"
+                    ],
+                    "properties": {
+                      "plugin_id": {
+                        "type": "string",
+                        "description": "The id of the plugin"
+                      },
+                      "instance_id": {
+                        "type": "string",
+                        "description": "The id of the instance of the plugin"
+                      },
+                      "asset": {
+                        "type": "object",
+                        "required": [
+                          "project_id",
+                          "project_name"
+                        ],
+                        "properties": {
+                          "project_id": {
+                            "type": "string",
+                            "description": "The id of the selected project"
+                          },
+                          "project_name": {
+                            "type": "string",
+                            "description": "The name of the selected project"
+                          },
+                          "tracker_id": {
+                            "type": "string",
+                            "description": "The id of the selected tracker. (Mandatory for TF)"
+                          },
+                          "tracker_name": {
+                            "type": "string",
+                            "description": "The name of the selected tracker. (Mandatory for TF)"
+                          },
+                          "issuetype_id": {
+                            "type": "string",
+                            "description": "The id of the selected issyuetype. (Mandatory for Jira)"
+                          },
+                          "issuetype_name": {
+                            "type": "string",
+                            "description": "The name of the selected issyuetype. (Mandatory for Jira)"
+                          },
+                          "asset_type_id": {
+                            "type": "string",
+                            "description": "The id of the selected asset type. (Mandatory for V1)"
+                          },
+                          "asset_type": {
+                            "type": "string",
+                            "description": "The name of the selected asset type. (Mandatory for V1)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "system_1",
+                  "system_2"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "system_1": {
+                      "plugin_id": "string",
+                      "instance_id": "string",
+                      "asset": {
+                        "project_id": "string",
+                        "project_name": "string",
+                        "tracker_id": "string",
+                        "tracker_name": "string",
+                        "issuetype_id": "string",
+                        "issuetype_name": "string",
+                        "asset_type_id": "string",
+                        "asset_type": "string"
+                      }
+                    },
+                    "system_2": {
+                      "plugin_id": "string",
+                      "instance_id": "string",
+                      "asset": {
+                        "project_id": "string",
+                        "project_name": "string",
+                        "tracker_id": "string",
+                        "tracker_name": "string",
+                        "issuetype_id": "string",
+                        "issuetype_name": "string",
+                        "asset_type_id": "string",
+                        "asset_type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
