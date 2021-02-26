@@ -208,7 +208,8 @@
               }
             }
           }
-        }
+        },
+        "description": "Adds a Key Pair to a Cloud"
       }
     },
     "/add_object_tag": {
@@ -253,7 +254,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/add_project_source": {
@@ -5089,6 +5091,3739 @@
             }
           }
         }
+      }
+    },
+    "/get_transformer_instances": {
+      "post": {
+        "summary": "Gets all plugin instances that support transformer functionality",
+        "operationId": "post-get_transformer_instances",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "instances": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "id": "string",
+                      "name": "string",
+                      "instances": {
+                        "id": "string",
+                        "name": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Gets all plugin instances that support transformer functionality\n\nToDo: additional responses?  response codes",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_transformer_projects": {
+      "post": {
+        "summary": "Gets all projects in the selected transformer plugin instance",
+        "operationId": "post-get_transformer_projects",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets all projects in the selected transformer plugin instance\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plugin_id": {
+                    "type": "string",
+                    "description": "The id of the plugin"
+                  },
+                  "instance_id": {
+                    "type": "string",
+                    "description": "The id of the instance of the plugin"
+                  }
+                },
+                "required": [
+                  "plugin_id",
+                  "instance_id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_transformer_system_info_for_edit": {
+      "post": {
+        "summary": "Gets a data map for listing without the field mapping info",
+        "operationId": "post-get_transformer_system_info_for_edit",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets a data map for listing without the field mapping info\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The id of the data map to be retrieved"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_transformer_workflow": {
+      "post": {
+        "summary": "Gets the workflow for given projects and asset type",
+        "operationId": "post-get_transformer_workflow",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets the workflow for given projects and asset type\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "instance_id": {
+                    "type": "string",
+                    "description": "The system instance id"
+                  },
+                  "plugin_id": {
+                    "type": "string",
+                    "description": "The system plugin id"
+                  },
+                  "projects": {
+                    "type": "string",
+                    "description": "selected projects"
+                  },
+                  "assets": {
+                    "type": "string",
+                    "description": "selected asset"
+                  }
+                },
+                "required": [
+                  "instance_id",
+                  "plugin_id",
+                  "projects",
+                  "assets"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/get_user_teams": {
+      "post": {
+        "summary": "Get a list of all Teams of which the  API user is a member",
+        "operationId": "post-get_user_teams",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Get a list of all Teams of which the authenticated API user is a member, and their assigned Role\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/get_workitem": {
+      "post": {
+        "summary": "Gets the details of a specific workitem",
+        "operationId": "post-get_workitem",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets the details of a specific workitem\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "tags": [
+          "ToDo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The internal `_id` of the workitem OR the authoritative `ID` from the origin system OR the `key` (user facing identifier) from the origin system"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_workitem_deliverycategory": {
+      "post": {
+        "summary": "Get all the packages a workitem is in",
+        "operationId": "post-get_workitem_deliverycategory",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Get all the packages a workitem is in, and the 'effective delivery category' for the workitem\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The internal `_id` of the workitem OR the authoritative `ID` from the origin system OR the `key` (user facing identifier) from the origin system"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_workitem_parent": {
+      "post": {
+        "summary": "",
+        "operationId": "post-get_workitem_parent",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "ToDo: everything?\n\nthe description of this method seems to be wrong:\n\nget_workitem_parent\n----------\n\nGet the details of a specific feature.\n\nRequired Arguments:\n\n* `id` - The internal `_id` of the feature OR the authoritative `ID` from the origin system OR the `key` (user facing identifier) from the origin system.",
+        "tags": [
+          "ToDo"
+        ]
+      },
+      "get": {
+        "summary": "",
+        "operationId": "get-get_workitem_parent",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": ""
+      }
+    },
+    "/get_workitem_timeline": {
+      "post": {
+        "summary": "Get the timeline of a specific workitem",
+        "operationId": "post-get_workitem_timeline",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Get the timeline of a specific workitem\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The internal `_id` of the workitem OR the authoritative `ID` from the origin system OR the `key` (user facing identifier) from the origin system"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_worklist": {
+      "post": {
+        "summary": "Gets a list of Pipeline in 'pending' status",
+        "operationId": "post-get_worklist",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets a list of Pipeline in 'pending' status",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "a key:value filter to limit the results"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/healthcheck": {
+      "post": {
+        "summary": "Performs a 'health check' on the system",
+        "operationId": "post-healthcheck",
+        "responses": {
+          "200": {
+            "description": "true/false",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "object",
+                      "properties": {
+                        "active_users": {
+                          "type": "number"
+                        },
+                        "healthy": {
+                          "type": "boolean"
+                        },
+                        "queues": {
+                          "type": "object",
+                          "properties": {
+                            "ciqueue": {
+                              "type": "object",
+                              "properties": {
+                                "depth": {
+                                  "type": "number"
+                                },
+                                "lag": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "depth",
+                                "lag"
+                              ]
+                            },
+                            "commandqueue": {
+                              "type": "object",
+                              "properties": {
+                                "depth": {
+                                  "type": "number"
+                                },
+                                "lag": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "depth",
+                                "lag"
+                              ]
+                            },
+                            "jobqueue": {
+                              "type": "object",
+                              "properties": {
+                                "depth": {
+                                  "type": "number"
+                                },
+                                "lag": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "depth",
+                                "lag"
+                              ]
+                            },
+                            "pi_stepqueue": {
+                              "type": "object",
+                              "properties": {
+                                "depth": {
+                                  "type": "number"
+                                },
+                                "lag": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "depth",
+                                "lag"
+                              ]
+                            },
+                            "taskqueue": {
+                              "type": "object",
+                              "properties": {
+                                "depth": {
+                                  "type": "number"
+                                },
+                                "lag": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "depth",
+                                "lag"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "ciqueue",
+                            "commandqueue",
+                            "jobqueue",
+                            "pi_stepqueue",
+                            "taskqueue"
+                          ]
+                        },
+                        "services": {
+                          "type": "object",
+                          "properties": {
+                            "ctm-core": {
+                              "type": "object",
+                              "properties": {
+                                "active": {
+                                  "type": "boolean"
+                                },
+                                "count": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "active",
+                                "count"
+                              ]
+                            },
+                            "ctm-jobhandler": {
+                              "type": "object",
+                              "properties": {
+                                "active": {
+                                  "type": "boolean"
+                                },
+                                "count": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "active",
+                                "count"
+                              ]
+                            },
+                            "ctm-msghub": {
+                              "type": "object",
+                              "properties": {
+                                "active": {
+                                  "type": "boolean"
+                                },
+                                "count": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "active",
+                                "count"
+                              ]
+                            },
+                            "ctm-poller": {
+                              "type": "object",
+                              "properties": {
+                                "active": {
+                                  "type": "boolean"
+                                },
+                                "count": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "active",
+                                "count"
+                              ]
+                            },
+                            "ctm-ui": {
+                              "type": "object",
+                              "properties": {
+                                "active": {
+                                  "type": "boolean"
+                                },
+                                "count": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "active",
+                                "count"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "ctm-core",
+                            "ctm-jobhandler",
+                            "ctm-msghub",
+                            "ctm-poller",
+                            "ctm-ui"
+                          ]
+                        },
+                        "time": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "active_users",
+                        "healthy",
+                        "queues",
+                        "services",
+                        "time"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "description": "Performs a 'health check' on the system",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/import_backup": {
+      "post": {
+        "summary": "Imports a backup file",
+        "operationId": "post-import_backup",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Imports an XML or JSON backup file.\n\nDEPRECATED: this function is deprecated.  Use `import_task` instead",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "deprecated": true,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "import_text": {
+                    "type": "string",
+                    "description": "An XML or JSON document in the format of a Task backup file"
+                  }
+                },
+                "required": [
+                  "import_text"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/import_catalog": {
+      "post": {
+        "summary": "Import all Project, Pipeline, Package, and Task definitions",
+        "operationId": "post-import_catalog",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Import all Project, Pipeline, Package, and Task definitions from a catalog as a JSON document\n\nToDo: responses",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projects": {
+                    "type": "array",
+                    "description": "An array of project JSON objects to import",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "pipelines": {
+                    "type": "array",
+                    "description": "An array of pipeline JSON objects to import",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "packages": {
+                    "type": "array",
+                    "description": "An array of package JSON objects to import",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "tasks": {
+                    "type": "array",
+                    "description": "An array of task JSON objects to import",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "overwrite": {
+                    "type": "boolean",
+                    "description": "If 'overwrite' is 'true' and the Definition exists, it will be replaced."
+                  },
+                  "human_readable": {
+                    "type": "boolean",
+                    "description": "Whether to provide output as name/message or id"
+                  },
+                  "import_into_team": {
+                    "type": "string",
+                    "description": "Team \"name\" or id. If specified, the catalog will be imported into the specified team, rather than the teams specified in the input.\nThis may be useful if you wish to import items from another team or Continuum instance"
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "projects": [
+                      {}
+                    ],
+                    "pipelines": [
+                      {}
+                    ],
+                    "packages": [
+                      {}
+                    ],
+                    "tasks": [
+                      {}
+                    ],
+                    "overwrite": true,
+                    "human_readable": true,
+                    "import_into_team": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/import_mapping": {
+      "post": {
+        "summary": "Extracts relevant information from imported mapping",
+        "operationId": "post-import_mapping",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Extracts relevant information from imported Mapping from ALMC mapping\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Source": {
+                    "type": "string",
+                    "description": "Source to which imported mapping belongs"
+                  },
+                  "MappingData": {
+                    "type": "string",
+                    "description": "Data from Mapping XML"
+                  },
+                  "IntegrationData": {
+                    "type": "string",
+                    "description": "Data from Integration json"
+                  }
+                },
+                "required": [
+                  "Source"
+                ]
+              }
+            }
+          },
+          "description": "MappingData and IntegrationData are required for ALMC"
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/import_package": {
+      "post": {
+        "summary": "Import a Package",
+        "operationId": "post-import_package",
+        "responses": {
+          "200": {
+            "description": "success or error"
+          }
+        },
+        "description": "Import a Package Definition from a backup file\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "backup": {
+                    "type": "object",
+                    "description": "A JSON document formatted as a Package Definition backup"
+                  },
+                  "overwrite": {
+                    "type": "boolean",
+                    "description": "If 'overwrite' is 'true' and the Definition exists, it will be replaced."
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/import_pipeline": {
+      "post": {
+        "summary": "Import a Pipeline Definition",
+        "operationId": "post-import_pipeline",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Import a Pipeline Definition\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "backup": {
+                    "type": "string",
+                    "description": " A JSON document formatted as a complete Continuum Pipeline Definition backup"
+                  },
+                  "overwrite": {
+                    "type": "boolean",
+                    "description": "If 'overwrite' is 'true' and the Definition exists, it will be replaced"
+                  }
+                },
+                "required": [
+                  "backup"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/import_progression": {
+      "post": {
+        "summary": "Import a Progression Definition",
+        "operationId": "post-import_progression",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Import a Progression Definition from a backup file\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "backup": {
+                    "type": "string",
+                    "description": "A JSON document formatted as a Progression Definition backup"
+                  },
+                  "overwrite": {
+                    "type": "boolean",
+                    "description": "If 'overwrite' is 'true' and the Progression exists, it will be replaced"
+                  }
+                },
+                "required": [
+                  "backup"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/import_project": {
+      "post": {
+        "summary": "Import a Project",
+        "operationId": "post-import_project",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Import a Project Definition from a backup file\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "backup": {
+                    "type": "string",
+                    "description": "A JSON document formatted as a complete Project backup"
+                  },
+                  "overwrite": {
+                    "type": "boolean",
+                    "description": "If 'overwrite' is 'true' the Project will be replaced"
+                  }
+                },
+                "required": [
+                  "backup"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/import_task": {
+      "post": {
+        "summary": "Imports a Task",
+        "operationId": "post-import_task",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Imports a Task Definition from backup file\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "backup": {
+                    "type": "string",
+                    "description": "A JSON document in the format of a Task backup file"
+                  },
+                  "overwrite": {
+                    "type": "boolean",
+                    "description": "If 'overwrite' is 'true' the Task(s) will be replaced"
+                  }
+                },
+                "required": [
+                  "backup"
+                ]
+              }
+            }
+          },
+          "description": "NOTE: There may be multiple Tasks in a single backup file, as often Tasks have dependencies on other Tasks, so all are included."
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/initiate_pipeline": {
+      "post": {
+        "summary": "Initiates a Pipeline Definition",
+        "operationId": "post-initiate_pipeline",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Initiates a Pipeline Definition\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "defintion": {
+                    "type": "string",
+                    "description": "ID or Name of a Pipeline Definition to initiate"
+                  },
+                  "project": {
+                    "type": "string",
+                    "description": "An identifying name for a Project. (ie: repo name)  Useful if a single pipeline definition supports multiple projects"
+                  },
+                  "group": {
+                    "type": "string",
+                    "description": "Summary name, (ie: branch name) used to group all runs of this definition/project combination. Describes your 'use' of this Pipeline"
+                  },
+                  "instance_name": {
+                    "type": "string",
+                    "description": "An explicit name to use for this unique run.  (ie: commit id)"
+                  },
+                  "details": {
+                    "type": "object",
+                    "description": "a JSON object with additional properties for the Pipeline Instance, often required by specific plugins"
+                  }
+                },
+                "required": [
+                  "defintion",
+                  "project",
+                  "group"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/install_add_on": {
+      "post": {
+        "summary": "Installs an Add-On",
+        "operationId": "post-install_add_on",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Installs an Add-On from the vs-exchange\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the Add-On to install"
+                  },
+                  "team": {
+                    "type": "string",
+                    "description": "Team to which to add parts of the Add-On that are scoped to a team. Required if the Add-On contains any such parts"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/install_license": {
+      "post": {
+        "summary": "Installs a license",
+        "operationId": "post-install_license",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Installs a license\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "license": {
+                    "type": "string",
+                    "description": "The text of a license key provided by Continuum"
+                  }
+                },
+                "required": [
+                  "license"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/invoke_plugin": {
+      "post": {
+        "summary": "Invokes a Plugin Function",
+        "operationId": "post-invoke_plugin",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Invokes a Plugin Function\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plugin": {
+                    "type": "string",
+                    "description": "The name of the Plugin PLUS the Module. (ex: github.main)"
+                  },
+                  "method": {
+                    "type": "string",
+                    "description": "The method to invoke. (ex \"test_connection\")"
+                  },
+                  "args": {
+                    "type": "string",
+                    "description": "A JSON formatted string of arguments which will be sent to the Plugin Function"
+                  },
+                  "team": {
+                    "type": "string",
+                    "description": "The Team in which to search for the Plugin Instance to use when invoking a Plugin Function that requires an Instance. Defaults to Plugins available to All Teams"
+                  },
+                  "instance_name": {
+                    "type": "string",
+                    "description": "A named Plugin instance in the Continuum configuration. Defaults to the Plugin Instance marked as default either within the specified Team or All Teams"
+                  },
+                  "timeout": {
+                    "type": "integer",
+                    "description": "The number of seconds to wait for the Plugin Function to execute before returning a timeout error.\n      Defaults to 60 seconds"
+                  }
+                },
+                "required": [
+                  "plugin",
+                  "method"
+                ]
+              }
+            }
+          },
+          "description": "This API call will block the thread while it waits for the Plugin Function to execute. Therefore, the timeout argument should be kept reasonably small based on the Plugin Function being executed to reduce the amount of time the thread remains blocked. This API cannot invoke Pipeline Step Plugin Functions. Pipeline Step Plugin Functions require the context of a Step to run successfully."
+        }
+      }
+    },
+    "/list_add_ons": {
+      "post": {
+        "summary": "Lists all Add-Ons",
+        "operationId": "post-list_add_ons",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Lists all Add-Ons installed in this Continuum instance\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "": {
+                    "type": "string",
+                    "description": "If true, lists the names of all parts of each of the Add-Ons. Defaults to false"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list_assets": {
+      "post": {
+        "summary": "Lists all Assets",
+        "operationId": "post-list_assets",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Lists all Assets\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "will filter a value match on: (Multiple filter arguments can be provided, delimited by spaces)",
+                    "enum": [
+                      "Asset Name",
+                      "Port",
+                      "Address",
+                      "DB Name",
+                      "Status",
+                      "Credential Username"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list_canvas_items": {
+      "post": {
+        "summary": "Gets a list of all elements in the Canvas feature",
+        "operationId": "post-list_canvas_items",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets a list of all elements in the Canvas feature\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "project": {
+                    "type": "string",
+                    "description": "filter by a Canvas Project name"
+                  },
+                  "component": {
+                    "type": "string",
+                    "description": "filter by a Canvas Component. (Project is required)"
+                  },
+                  "repository": {
+                    "type": "string",
+                    "description": "specify the repository ('file' or 'db', 'db' if omitted)",
+                    "enum": [
+                      "file",
+                      "db"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/list_changes": {
+      "post": {
+        "summary": "Gets all Changes",
+        "operationId": "post-list_changes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets all Changes\n\nToDo: responses\nToDo: managed and unmanaged are two separate arguments?",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "project": {
+                    "type": "string",
+                    "description": "will limit the results to a specific 'project'"
+                  },
+                  "group": {
+                    "type": "string",
+                    "description": "will limit the results to a specific 'group'"
+                  },
+                  "since": {
+                    "type": "string",
+                    "description": "will only return changes since the provided timestamp"
+                  },
+                  "managed": {
+                    "type": "string",
+                    "description": "will list only the managed changes"
+                  },
+                  "unmanaged": {
+                    "type": "string",
+                    "description": "will list only the unmanaged changes"
+                  },
+                  "limit": {
+                    "type": "string",
+                    "description": "will limit the number of changes"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list_cloud_accounts": {
+      "post": {
+        "summary": "Gets all Cloud Accounts",
+        "operationId": "post-list_cloud_accounts",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets all Cloud Accounts\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "will filter a value match on one or more filter arguments, delimited by spaces. Account Name\nAccount Number / Provider / Login ID / Default Cloud Name"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list_cloud_keypairs": {
+      "post": {
+        "summary": "Gets all the Key Pairs defined on a Cloud",
+        "operationId": "post-list_cloud_keypairs",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets all the Key Pairs defined on a Cloud\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cloud": {
+                    "type": "string",
+                    "description": "Name or ID of a Cloud"
+                  }
+                },
+                "required": [
+                  "cloud"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list_clouds": {
+      "post": {
+        "summary": "Gets all Clouds",
+        "operationId": "post-list_clouds",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets all Clouds\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "will filter a value match on one or more filter arguments, delimited by spaces. Cloud Name / Provider / Default Account Name / API URL"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list_credentials": {
+      "post": {
+        "summary": "Gets all Shared Credentials",
+        "operationId": "post-list_credentials",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets all Shared Credentials\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "will filter a value match on one or more filter arguments, delimited by spaces. Credential Name / Username / Domain / Description"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list_packages": {
+      "post": {
+        "summary": "Gets all Package Definitions",
+        "operationId": "post-list_packages",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets all Package Definitions\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/list_pipelinegroups": {
+      "post": {
+        "summary": "Gets all Pipeline Instance Groups",
+        "operationId": "post-list_pipelinegroups",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets all Pipeline Instance Groups\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pipeline": {
+                    "type": "string",
+                    "description": "will limit the results a specific Pipeline Definition"
+                  },
+                  "project": {
+                    "type": "string",
+                    "description": "will limit the results a specific 'project'"
+                  },
+                  "group": {
+                    "type": "string",
+                    "description": "will limit the results to a specific 'group'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list_pipelineinstances": {
+      "post": {
+        "summary": "Gets all Pipeline Instances",
+        "operationId": "post-list_pipelineinstances",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets all Pipeline Instances\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "definition": {
+                    "type": "string",
+                    "description": "will limit the results a specific Pipeline Definition"
+                  },
+                  "project": {
+                    "type": "string",
+                    "description": "will limit the results to a specific project"
+                  },
+                  "group": {
+                    "type": "string",
+                    "description": "will limit the results to a specific group"
+                  },
+                  "since": {
+                    "type": "string",
+                    "description": "Will only return instances since the provided timestamp"
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "description": "Limit the number of results (0 for all results, 100 if omitted)",
+                    "default": 100
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list_pipelines": {
+      "post": {
+        "summary": "Gets all Pipeline Definitions",
+        "operationId": "post-list_pipelines",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets all Pipeline Definitions\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/list_processes": {
+      "post": {
+        "summary": "Gets all running processes",
+        "operationId": "post-list_processes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets all running processes\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/list_progressions": {
+      "post": {
+        "summary": "Gets all Progressions",
+        "operationId": "post-list_progressions",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets all Progressions\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/list_projects": {
+      "post": {
+        "summary": "Gets all Projects",
+        "operationId": "post-list_projects",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets all Projects\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/list_registries": {
+      "post": {
+        "summary": "Gets all Registries",
+        "operationId": "post-list_registries",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets all Registries\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/list_tags": {
+      "post": {
+        "summary": "Gets all Assignment Groups",
+        "operationId": "post-list_tags",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets all Assignment Groups (formerly known as Tags)\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "tags": [
+          "ToDo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "will filter a value match in Tag Name - multiple filter arguments can be provided, delimited by spaces"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list_tasks": {
+      "post": {
+        "summary": "Gets all Tasks",
+        "operationId": "post-list_tasks",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Gets all Tasks\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "will filter a value match in Task Name, Code or Description - multiple filter arguments can be provided, delimited by spaces"
+                  }
+                }
+              }
+            }
+          },
+          "description": "The Task Objects returned to this function are streamlined - they do not contain all the properties available in the `get_task` endpoint."
+        }
+      }
+    },
+    "/list_users": {
+      "post": {
+        "summary": "Gets all Users",
+        "operationId": "post-list_users",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Gets all registered Users\n\nOnly users with the role \"System Administrator\" can list all registered users.  If the credentials used for this API call do not have the proper permission, the call will not succeed.\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "will filter a value match on: \n\n- Full Name\n- Login ID\n- Role\n- Email address\n\n(multiple filter arguments can be provided, delimited by spaces.)"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/metric": {
+      "post": {
+        "summary": "Gets value of metric",
+        "operationId": "post-metric",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Given a named metric and required context retrieve the value of that metric\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "The name of the desired metric"
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "A collection of key value pairs specific to the type provided"
+                  }
+                },
+                "required": [
+                  "type",
+                  "context"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/new_revision": {
+      "post": {
+        "summary": "Creates a new Revision",
+        "operationId": "post-new_revision",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Creates a new Revision of a specified Version of a Package\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package": {
+                    "type": "string",
+                    "description": "Name of the Package to revise"
+                  },
+                  "version": {
+                    "type": "string",
+                    "description": "Version in which to create a new Revision (Package Revisions increment _within_ specific Versions"
+                  },
+                  "full_version": {
+                    "type": "string",
+                    "description": "Full Version of package to promote, optional alternative selector to `revision`"
+                  }
+                },
+                "required": [
+                  "package"
+                ]
+              }
+            }
+          },
+          "description": "Note: Often, it is desireable that the `full_version` actually contain the number of the newly created Revision.  A special keyword, \n `__NEWREVISION`, is recognized in the value provided for `full_version` and will be replaced with the new Revision number."
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/override_control": {
+      "post": {
+        "summary": "Override a Control",
+        "operationId": "post-override_control",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Given a Package Revision, a Phase and a Control Name, will override that Control if it exists and is failed\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package": {
+                    "type": "string",
+                    "description": "Name of the Package to promote to a progression Phase"
+                  },
+                  "revision": {
+                    "type": "string",
+                    "description": "Revision number of a Package to promote, takes precedence over `full_version`"
+                  },
+                  "full_version": {
+                    "type": "string",
+                    "description": "Full Version of package to promote, optional alternative selector to `revision`"
+                  },
+                  "phase": {
+                    "type": "string",
+                    "description": "Name of the Phase containing the Activity of the Control to override"
+                  },
+                  "activity": {
+                    "type": "string",
+                    "description": "Name of the Activity containing the Control to override"
+                  },
+                  "control": {
+                    "type": "string",
+                    "description": "Name of the Control to override"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "description": "Description of the reason for overriding the Control"
+                  }
+                },
+                "required": [
+                  "package",
+                  "revision",
+                  "full_version",
+                  "phase",
+                  "activity",
+                  "control",
+                  "reason"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/post_pi_data": {
+      "post": {
+        "summary": "Post data to the Workspace on a running Pipeline Instance",
+        "operationId": "post-post_pi_data",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Post data to the Workspace on a running Pipeline Instance\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pi": {
+                    "type": "string",
+                    "description": "the id or name of a Pipeline Instance"
+                  },
+                  "key": {
+                    "type": "string",
+                    "description": "key to set in the Workspace data"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "value for the provided key"
+                  }
+                },
+                "required": [
+                  "pi",
+                  "key",
+                  "value"
+                ]
+              }
+            }
+          },
+          "description": "All data is posted under a parent key - 'returns', to protect the overall Workspace."
+        }
+      }
+    },
+    "/promote_revision": {
+      "post": {
+        "summary": "Promotes a Package Revision",
+        "operationId": "post-promote_revision",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Promotes a Package Revision to a particular Phase\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "tags": [
+          "ToDo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package": {
+                    "type": "string",
+                    "description": "Name of the Package to promote to a Progression Phase"
+                  },
+                  "revision": {
+                    "type": "string",
+                    "description": "Revision number of a Package to promote, takes precedence over `full_version`"
+                  },
+                  "full_version": {
+                    "type": "string",
+                    "description": "Optional Full Version of package to promote, optional alternative selector to `revision`"
+                  },
+                  "phase": {
+                    "type": "string",
+                    "description": "Name of the Phase to which the specified Package Revision will be promoted"
+                  },
+                  "new_version": {
+                    "type": "string",
+                    "description": "If provided, all Revisions being promoted will be updated to the provided `new_version` - will attempt to also update `full_version` if possible"
+                  }
+                },
+                "required": [
+                  "package",
+                  "revision",
+                  "full_version",
+                  "phase"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/register_artifact": {
+      "post": {
+        "summary": "Record a new revision of a specific Artifact",
+        "operationId": "post-register_artifact",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Record a new revision of a specific Artifact\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "project": {
+                    "type": "string",
+                    "description": "Name or ID of the Project where this Artifact is defined"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the Artifact to revise"
+                  },
+                  "branch": {
+                    "type": "string",
+                    "description": "Branch in the repository from which this artifact was built"
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "Optional URL or path to where this Artifact can be found"
+                  },
+                  "build_data": {
+                    "type": "object",
+                    "description": "Optional JSON object additional data about the build"
+                  }
+                },
+                "required": [
+                  "project",
+                  "name",
+                  "branch",
+                  "location"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/remove_object_tag": {
+      "post": {
+        "summary": "Removes a Tag from an object",
+        "operationId": "post-remove_object_tag",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Removes an Tag from an object\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tag": {
+                    "type": "string",
+                    "description": "The name of the Tag"
+                  },
+                  "object_id": {
+                    "type": "string",
+                    "description": "The ID of the object"
+                  },
+                  "object_type": {
+                    "type": "string",
+                    "description": "The numeric type of the object"
+                  }
+                },
+                "required": [
+                  "tag",
+                  "object_id",
+                  "object_type"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remove_team": {
+      "post": {
+        "summary": "Remove an empty Team",
+        "operationId": "post-remove_team",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Remove an empty Team\n\nOnly a 'System Administrator' can remove a team.  If the credentials used for this API call\nare not a Syetem Administrator, the call will not succeed.\n\nToDo: responses",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "team": {
+                    "type": "string",
+                    "description": "Name or ID of the Team to change"
+                  }
+                },
+                "required": [
+                  "team"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/remove_team_user": {
+      "post": {
+        "summary": "Removes a User from a Team",
+        "operationId": "post-remove_team_user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Removes a User from a Team\n\nOnly a 'Team Administrator' can manage Team membership.  If the credentials used for this API call\nare not a Team Administrator for the specified Team, the call will not succeed.\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "team": {
+                    "type": "string",
+                    "description": "Name or ID of the Team to change"
+                  },
+                  "user": {
+                    "type": "string",
+                    "description": "Name or ID of the User to remove"
+                  },
+                  "default": {
+                    "type": "string",
+                    "description": "Users must be in at least one Team.  If the removal operation would leave this User Teamless, specify a new default Team Name for the User. Will attempt to use `Default` if omitted.",
+                    "default": "Default"
+                  }
+                },
+                "required": [
+                  "team",
+                  "user"
+                ]
+              }
+            }
+          },
+          "description": "NOTE: if a new Default Team is assigned, the User will be given the `User` role in the Default Team"
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/rerun_pipelineinstance": {
+      "post": {
+        "summary": "Rerun an Instance",
+        "operationId": "post-rerun_pipelineinstance",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Rerun an Instance, using the saved 'initial data'. This creates a new Instance exactly as the provided one was started\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pi": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "pi"
+                ]
+              }
+            }
+          },
+          "description": ""
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/reset_password": {
+      "post": {
+        "summary": "Resets the password",
+        "operationId": "post-reset_password",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Resets the password of the authenticated, or a specified User.\n\nIf a user is specified, and the authenticated user is an Administrator,\nthis will reset the password of the specified user to the provided value.\n\nIf no user is specified, the password of the authenticated user will be changed.\n\n> NOTE: to prevent accidental change of an Administrators password, an extra trap is in place: the username (or id) MUST be provided, even if the authenticated user is the user being changed.\n\nToDo: responses\nToDo: verify 'generate' argument\n\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "description": "the new password"
+                  },
+                  "generate": {
+                    "type": "boolean",
+                    "description": "generate a random password"
+                  }
+                },
+                "required": [
+                  "password",
+                  "generate"
+                ]
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "description": "the new password "
+                  },
+                  "generate": {
+                    "type": "boolean",
+                    "description": "generate a random password"
+                  },
+                  "user": {
+                    "type": "string",
+                    "description": "Either the User ID or Name"
+                  }
+                },
+                "required": [
+                  "password",
+                  "generate"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "password": "string",
+                    "generate": true,
+                    "user": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Specify either `password` or `generate`"
+        },
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/resubmit_change": {
+      "post": {
+        "summary": "Resubmits a change",
+        "operationId": "post-resubmit_change",
+        "responses": {
+          "200": {
+            "description": "true/errors"
+          }
+        },
+        "description": "Resubmits a change 'Submission' payload to the specified Project.\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "Valid MongoDB query to identify the previous payload to resubmit"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          },
+          "description": "If the query would return multiple submissions, the newest one is matched"
+        }
+      }
+    },
+    "/resubmit_task_instance": {
+      "post": {
+        "summary": "Resubmits a Task Instance",
+        "operationId": "post-resubmit_task_instance",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Resubmits an Errored or Cancelled Task Instance.  Resubmit is only valid on Errored or Cancelled Task Instances.\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "instance": {
+                    "type": "string",
+                    "description": "The Task Instance identifier"
+                  }
+                },
+                "required": [
+                  "instance"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/resync_transformer_event": {
+      "post": {
+        "summary": "Resyncs a failed event",
+        "operationId": "post-resync_transformer_event",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Resyncs a failed Transformer event\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "inbound_id": {
+                    "type": "string",
+                    "description": "The inbound id of the failed event"
+                  }
+                },
+                "required": [
+                  "inbound_id"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/retry_pipelineinstance": {
+      "post": {
+        "summary": "Retries a Pipeline Instance",
+        "operationId": "post-retry_pipelineinstance",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Attempt to retry a failed Pipeline Instance.  Simply restarts it again at Phase One.\n\n> CAUTION: The Workspace data is not cleared or reset.  Depending on the design of the Pipeline,\nthis may not succeed, or might produce unexpected results.\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pi": {
+                    "type": "string",
+                    "description": "The Name or ID of a Pipeline Instance"
+                  }
+                },
+                "required": [
+                  "pi"
+                ]
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pi": {
+                    "type": "string",
+                    "description": "The Name or ID of a Pipeline Instance"
+                  }
+                },
+                "required": [
+                  "pi"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "pi": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/reversion_packagerevision": {
+      "post": {
+        "summary": "Changes the version of a Package Revision",
+        "operationId": "post-reversion_packagerevision",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Changes the Version of the specified (and all matching previous) Package Revisions\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package": {
+                    "type": "string",
+                    "description": "Name of the Package to promote to a Progression Phase"
+                  },
+                  "revision": {
+                    "type": "string",
+                    "description": "Revision number of a Package to promote, takes precedence over `full_version`"
+                  },
+                  "full_version": {
+                    "type": "string",
+                    "description": "Optional Full Version of package to promote, optional alternative selector to `revision`"
+                  },
+                  "new_version": {
+                    "type": "string",
+                    "description": "If provided, all Revisions being promoted will be updated to the provided `new_version` - will attempt to also update `full_version` if possible"
+                  }
+                },
+                "required": [
+                  "package",
+                  "revision",
+                  "full_version",
+                  "new_version"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/run_metric": {
+      "post": {
+        "summary": "Runs a specific metric",
+        "operationId": "post-run_metric",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Runs a specific metric\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "module": {
+                    "type": "string",
+                    "description": "Name of the metrics module that contains the metric function to run"
+                  },
+                  "metric": {
+                    "type": "string",
+                    "description": "Name of a function definition in the specified module"
+                  }
+                },
+                "required": [
+                  "module",
+                  "metric"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/run_task": {
+      "post": {
+        "summary": "Runs a Task",
+        "operationId": "post-run_task",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "initialdata": {
+                    "type": "string",
+                    "description": "A JSON document defining the intial Runtime Variable environment for this Task"
+                  },
+                  "log_level": {
+                    "type": "string",
+                    "description": "an integer (0-4) where 0 is none, 2 is normal and 4 is verbose",
+                    "default": "2"
+                  },
+                  "parameters": {
+                    "type": "string",
+                    "description": "A JSON or XML document defining parameters for the Task"
+                  },
+                  "options": {
+                    "type": "object",
+                    "description": "a JSON object defining certain options for this Task.  Typically used to provide scope for extensions to the Task Engine"
+                  },
+                  "run_later": {
+                    "type": "string",
+                    "description": "if provided, the Task will be scheduled to run at the specified date/time",
+                    "format": "date-time"
+                  },
+                  "run_on_worker": {
+                    "type": "string",
+                    "description": "if provided, the Task will be explicitly assigned to the specified worker - use the 'user@host' format to identify the target worker"
+                  }
+                }
+              }
+            }
+          },
+          "description": "* If `output_format` is set to `text`, returns only a Task Instance ID.\n* If `run_later` was specified, will return a success or error message."
+        },
+        "description": "Runs a Task\n\nToDo: responses\nToDo: isd initialdata a reference to a document, or a json object?",
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/save_email_configuration": {
+      "post": {
+        "summary": "Save email notification",
+        "operationId": "post-save_email_configuration",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Configure email notification for the data map\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The id of the data map"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/schedule_tasks": {
+      "post": {
+        "summary": "Schedules one or more Tasks",
+        "operationId": "post-schedule_tasks",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Schedules one or more Tasks\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tasks": {
+                    "type": "string",
+                    "description": "a JSON document containing a list of Tasks and schedule details"
+                  }
+                },
+                "required": [
+                  "tasks"
+                ]
+              }
+            }
+          },
+          "description": "Schedule definition format:\n\nAll lists are _zero based_ integers.\n\nThe [Task Schedule Object](api-response-objects#task-schedule) response from the `get_task_schedules` command in JSON format\n can provide schedule definition examples for this command.\n\n{\n    \"Task\" : *task name*,\n    \"Version\" : *optional*,\n    \"Months\": \"*\" or [list of months],\n    \"DaysOrWeekdays\": \"Days\" = days of the month, \"Weekdays\" = days of the week (default),\n    \"Days\": \"*\" or [list of days],\n    \"Hours\": \"*\" or [list of hours],\n    \"Minutes\": \"*\" or [list of minutes]\n},\n{\n    ...\n}\n\nToDo: responses\nToDo: payload examples\n\n"
+        }
+      }
+    },
+    "/send_message": {
+      "post": {
+        "summary": "Sends a message to a user",
+        "operationId": "post-send_message",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Sends a message to a registered user.  Message will be 'From' the authenticated API user.\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "to": {
+                    "type": "string",
+                    "description": "a single or comma-separated list of valid email addresses or Continuum Users"
+                  },
+                  "subject": {
+                    "type": "string",
+                    "description": "a subject line"
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "the message body"
+                  },
+                  "cc": {
+                    "type": "string",
+                    "description": "a carbon copy list of comma-separated email addresses or Continuum Users"
+                  },
+                  "bcc": {
+                    "type": "string",
+                    "description": "a blind carbon copy list of comma-separated email addresses or Continuum Users"
+                  }
+                },
+                "required": [
+                  "to",
+                  "subject",
+                  "message"
+                ]
+              }
+            }
+          },
+          "description": "The 'to' argument accepts both email addresses AND Continuum Users.  Each item in the 'to' list will try to look up a Continuum User, and if it doesn't match, will assume the entry is an email address."
+        }
+      }
+    },
+    "/set_pi_data": {
+      "post": {
+        "summary": "Set data on a Pipeline Instance",
+        "operationId": "post-set_pi_data",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Set Workspace data on a running Pipeline Instance\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pi": {
+                    "type": "string",
+                    "description": "the id or name of a Pipeline Instance"
+                  },
+                  "key": {
+                    "type": "string",
+                    "description": "key to set in the Workspace data - certain internal keys are restricted and cannot be overridden"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "value for the provided key"
+                  }
+                },
+                "required": [
+                  "pi",
+                  "key",
+                  "value"
+                ]
+              }
+            }
+          },
+          "description": "> NOTE: USE WITH CAUTION! This function has the ability to overwrite values anywhere in\nthe Workspace.  For safer and more common cases, use 'post_pi_data'."
+        }
+      }
+    },
+    "/set_pi_description": {
+      "post": {
+        "summary": "Set the Pipeline Instance description",
+        "operationId": "post-set_pi_description",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Set the description of a specific Pipeline Instance.\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pi": {
+                    "type": "string",
+                    "description": "the id or name of a Pipeline Instance"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description to set (HTML allowed)"
+                  }
+                },
+                "required": [
+                  "pi",
+                  "description"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/set_pi_global_summary": {
+      "post": {
+        "summary": "Set global summary on a Pipeline Instance",
+        "operationId": "post-set_pi_global_summary",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Set global summary data on a pipeline instance\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "tags": [
+          "ToDo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pi": {
+                    "type": "string",
+                    "description": "the id or name of a pipeline instance"
+                  },
+                  "key": {
+                    "type": "string",
+                    "description": "key to set in the global summary"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "value for the provided key"
+                  }
+                },
+                "required": [
+                  "pi",
+                  "key",
+                  "value"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/set_pipelinegroup_number": {
+      "post": {
+        "summary": "Set the autonumber root on a Pipeline Instance Group",
+        "operationId": "post-set_pipelinegroup_number",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Set the autonumber root on Pipeline Instance Group. (Used to issue ascending numbers to Instances in the Group)\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pg": {
+                    "type": "string",
+                    "description": "The ID of a Pipeline Instance Group"
+                  },
+                  "newnumber": {
+                    "type": "string",
+                    "description": "The new number to set as the autonumber root"
+                  }
+                },
+                "required": [
+                  "pg",
+                  "newnumber"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/set_registry": {
+      "post": {
+        "summary": "Sets Registry values",
+        "operationId": "post-set_registry",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Sets values in a specific Registry document\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "tags": [
+          "ToDo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the Registry document"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "Value to set at specified path, or entire document - if omitted, target key or document will be cleared"
+                  },
+                  "path": {
+                    "type": "string",
+                    "description": "If specified, will place `value` at this path - if omitted, will update the entire document"
+                  },
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "set",
+                      "unset",
+                      "addtoset",
+                      "push",
+                      "pull",
+                      "merge"
+                    ]
+                  },
+                  "create": {
+                    "type": "boolean",
+                    "description": "Create named Registry if it doesn't exist"
+                  },
+                  "options": {
+                    "type": "string",
+                    "description": "Additional Options. Dependent on the value of `action`"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          },
+          "description": "* if `action: merge` is specified, the available options are:\n* `overwrite` - Overwrite exisiting keys on conflict? Valid values: true|false (default).\n* `deep` - Perform a shallow or deep merge when merging objects Valid values: true|false (default)."
+        }
+      }
+    },
+    "/stop_task": {
+      "post": {
+        "summary": "Stops a Task",
+        "operationId": "post-stop_task",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Stops a running Task Instance\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "instance": {
+                    "type": "string",
+                    "description": "The Task Instance identifier"
+                  }
+                },
+                "required": [
+                  "instance"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/submit_change": {
+      "post": {
+        "summary": "Submits a change payload",
+        "operationId": "post-submit_change",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Submits a change payload to the specified Project\n\nToDo: responses\nToDo: payload (example)",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "toproject": {
+                    "type": "string",
+                    "description": "the ID or Name of a Project"
+                  }
+                },
+                "required": [
+                  "toproject"
+                ]
+              }
+            }
+          },
+          "description": "> NOTE: This API is different than most others.  It's expecting a JSON\ndocument as HTTP POST data.  The required `toproject` argument can either beprovided inside the POST data, or on the URL querystring.\n"
+        }
+      }
+    },
+    "/test_plugin_connection": {
+      "post": {
+        "summary": "Tests connectivity to a Plugin instance",
+        "operationId": "post-test_plugin_connection",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Tests connectivity to a Plugin instance defined in the Continuum configuration\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plugin_name": {
+                    "type": "string",
+                    "description": "the name of a Plugin (ex: v1plugin) - this will look up the proper Module"
+                  },
+                  "plugin": {
+                    "type": "string",
+                    "description": "the name of the Plugin PLUS the Module. (ex: v1plugin.main)",
+                    "deprecated": true
+                  },
+                  "instance": {
+                    "type": "string",
+                    "description": "A named Plugin instance in the Continuum configuration - if not used, the default instance will be tested"
+                  },
+                  "team": {
+                    "type": "string",
+                    "description": "the Team to search for the Plugin Instance. Defaults to plugins available to All Teams"
+                  }
+                },
+                "required": [
+                  "plugin_name",
+                  "plugin"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/uninstall_add_on": {
+      "post": {
+        "summary": "Uninstalls an Add-On",
+        "operationId": "post-uninstall_add_on",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Uninstalls an Add-On\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the Add-On to uninstall"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/update_cloud": {
+      "post": {
+        "summary": "Updates a Cloud",
+        "operationId": "post-update_cloud",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Updates a Cloud\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name or ID of the Cloud to update"
+                  },
+                  "apiurl": {
+                    "type": "string",
+                    "description": "URL of the Cloud API endpoint"
+                  },
+                  "apiprotocol": {
+                    "type": "string",
+                    "description": "Cloud API endpoint protocol"
+                  },
+                  "default_account": {
+                    "type": "string",
+                    "description": "the name of a default Account for this Cloud"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/update_settings": {
+      "post": {
+        "summary": "Updates the settings",
+        "operationId": "post-update_settings",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Updates the settings of a process or module\n\nToDo: responses\nToDo: settings argument (string/arraylist?)",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "module": {
+                    "type": "string",
+                    "description": "name of the module to apply the settings"
+                  },
+                  "settings": {
+                    "type": "string",
+                    "description": "a list of name:value setting objects"
+                  }
+                },
+                "required": [
+                  "module",
+                  "settings"
+                ]
+              }
+            }
+          },
+          "description": "NOTE: the update_settings command requires submission of a JSON settings object. As a guide for updating settings, first execute this command with the `Accept: application/json` header (or output_format=json argument).\n\nFor example, to update Messenger settings, first do:\n\nget_settings?module=messenger&output_format=json\n\n...then use the result as a template for update_settings."
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/update_transformer_data_map": {
+      "post": {
+        "summary": "Updates a data map",
+        "operationId": "post-update_transformer_data_map",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Updates a data map\n\nToDo: responses\nToDo: forward-direction and backwad-direction arguments",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The id of the data map"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the data map"
+                  },
+                  "direction_type": {
+                    "type": "string",
+                    "description": "The direction of the mapping",
+                    "enum": [
+                      "forward-direction",
+                      "backward-direction",
+                      "bi-direction"
+                    ]
+                  },
+                  "forward-direction": {
+                    "type": "string",
+                    "description": "The field mappings for the forward direction"
+                  },
+                  "backward-direction": {
+                    "type": "string",
+                    "description": "The field mappings for the backward direction"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/update_transformer_data_map_with_new_fields": {
+      "post": {
+        "summary": "Updates data map",
+        "operationId": "post-update_transformer_data_map_with_new_fields",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Updates data map by fetching new fields from the target systems\n\nToDo: responses",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The id of the data map"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/update_user": {
+      "post": {
+        "summary": "Updates a user account",
+        "operationId": "post-update_user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Updates a user account\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string",
+                    "description": "ID or Name of the User to update"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The full name of the user"
+                  },
+                  "role": {
+                    "type": "string",
+                    "description": "The user's role",
+                    "enum": [
+                      "Administrator",
+                      "Developer",
+                      "User"
+                    ]
+                  },
+                  "teams": {
+                    "type": "string",
+                    "description": "A list of teams the user belongs to, along with a role for each team. Teams and roles are separated by a colon. Team/role pairs are separated by commas."
+                  },
+                  "is_system_administrator": {
+                    "type": "boolean",
+                    "description": "Whether the user should have system administrator privileges - default is false"
+                  },
+                  "is_shared_asset_manager": {
+                    "type": "boolean",
+                    "description": "Whether the user should have shared asset manager privileges - default is false"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Email address for the user.  Can be cleared with \"None\""
+                  },
+                  "authtype": {
+                    "type": "string",
+                    "enum": [
+                      "local",
+                      "ldap"
+                    ]
+                  },
+                  "forcechange": {
+                    "type": "boolean",
+                    "description": "Require user to change password on next login"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Status of the account",
+                    "enum": [
+                      "enabled",
+                      "disabled",
+                      "locked"
+                    ]
+                  },
+                  "expires": {
+                    "type": "string",
+                    "description": "Expiration date for this account.  Must be in mm/dd/yyyy format. Can be cleared with \"None\""
+                  },
+                  "groups": {
+                    "type": "string",
+                    "description": "Add to the list of assignment groups the user belongs to. Group names cannot contain spaces. Comma delimited list"
+                  },
+                  "contributors": {
+                    "type": "string",
+                    "description": "Contributors are usernames in source control management systems related to this User - enter one or more comma-separated Contributor 'aliases'"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The new password. If a password is set then the 'generate' option is ignored"
+                  },
+                  "generate": {
+                    "type": "boolean",
+                    "description": "Generate a random password - this only works if no password is provided via the 'password' option"
+                  }
+                },
+                "required": [
+                  "user"
+                ]
+              }
+            }
+          },
+          "description": "Only users with the role \"System Administrator\" can update users.  If the credentials used for this API call\ndo not have the proper permission, the call will not succeed.\n\nProperties will only be updated if the option is provided.  Omitted properties will not be changed.\n\nNOTE: the \"username\" of a user cannot be changed.\n\nIf a user has 'locked' their account by numerous failed login attempts, the flag is reset\nby setting any property.  It's easiest to just set the status to 'enabled'."
+        }
+      }
+    },
+    "/v1_workitem_sync": {
+      "post": {
+        "summary": "Accepts telemetry from Agility",
+        "operationId": "post-v1_workitem_sync",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Accepts telemetry from Digital.ai Agility regarding changes to Workitems\n\n> NOTE: This API is specifically bound to the format of Digital.ai Agility webhooks.  It's expecting a JSON\ndocument as HTTP POST data.  See the Digital.ai Agility webhooks documentation for the actual schema.\n\n> This API hands processing off to a jobhandler thread.  Therefore it will always return 'success' in accepting the payload, or an error.\nA 'success'ful API transaction does not mean that Continuum successfully processed the payload - watch the jobhandler log for details.\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ]
+      }
+    },
+    "/validate_instance": {
+      "post": {
+        "summary": "Validate an instance of Continuum exists",
+        "operationId": "post-validate_instance",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "ToDo"
+        ],
+        "description": "Validate an instance of Continuum exists and the request is authenticated\n\nToDo: responses\nToDo: do I need a token here?",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ]
+      }
+    },
+    "/version": {
+      "get": {
+        "summary": "Gets the Continuum version",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "Continuum version number"
+          }
+        },
+        "operationId": "get-version",
+        "description": "Gets the Continuum version"
+      }
+    },
+    "/winrm_command": {
+      "post": {
+        "summary": "Test connectivity or issue Windows Remote Management commands on a defined Asset",
+        "operationId": "post-winrm_command",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Test connectivity or issue Windows Remote Management commands on a defined Asset",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "asset": {
+                    "type": "string",
+                    "description": "Asset ID or Name of an Asset to use for the connection"
+                  },
+                  "server": {
+                    "type": "string",
+                    "description": "WinRM Server FQDN or IP address"
+                  },
+                  "user": {
+                    "type": "string",
+                    "description": "User account"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "User password"
+                  },
+                  "kerberos": {
+                    "type": "boolean",
+                    "description": "Use Kerberos authentication if 'True', basic authentication if omitted"
+                  },
+                  "command": {
+                    "type": "string",
+                    "description": "The command to execute - will connection test only if omitted"
+                  },
+                  "pwershell": {
+                    "type": "boolean",
+                    "description": "will execute the command as a PowerShell command"
+                  }
+                },
+                "required": [
+                  "asset",
+                  "server",
+                  "user",
+                  "password"
+                ]
+              }
+            }
+          },
+          "description": "Specify either the `asset` or `server` + `user` + `password`"
+        },
+        "tags": [
+          "Internal",
+          "ToDo"
+        ]
+      }
+    },
+    "/xlrelease_status": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [
+          "Internal",
+          "ToDo"
+        ],
+        "responses": {},
+        "operationId": "get-xlrelease_status",
+        "description": "ToDo: everything :-)\n\n\nThis endpoint expects a customized response from XL Release.\n\nThis payload will be evaluated and mapped (if possible) to the appropriate Continuum context,\nbe that a Pipeline Instance, Package Revision, or other asset.\n\nThis payload must be an JSON object with the following two root level keys:\n\n* `continuum_context` - All of the Continuum context that was passed to the XL Release when it was triggered.\n* `xlrelease_details` - A document containing all the details of the XL Release - phases, tasks, status indicators, etc.\n\nExample Payload:\n\n```\n{\n    \"continuum_context\": {\n\"project_id\": \"abc123\",\n\"pipeline_id\": \"\"zyx890\",\n\"all the other\": \"data in the context\"\n    },\n    \"xlrelease_details\": {\n\"all the details\": \"of the release\"\n    }\n}\n```\n\nReturns: HTTP Return Code, no data."
       }
     }
   },
