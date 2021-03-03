@@ -13,6 +13,10 @@
     {
       "url": "http://54.209.208.115:8080/api",
       "description": "QA Automation Server"
+    },
+    {
+      "url": "http://192.168.86.49:8080/api",
+      "description": "local server"
     }
   ],
   "components": {
@@ -36,7 +40,61 @@
         "operationId": "post-accept_webhook",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "Valid Handler name": {
+                    "value": {
+                      "ErrorCode": "string",
+                      "ErrorDetail": "string",
+                      "ErrorMessage": "string",
+                      "Method": "accept_webhook",
+                      "Response": "Payload accepted"
+                    }
+                  },
+                  "Invalid Handler name": {
+                    "value": {
+                      "ErrorCode": "string",
+                      "ErrorDetail": "string",
+                      "ErrorMessage": "string",
+                      "Method": "accept_webhook",
+                      "Response": "Payload accepted"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "security": [
@@ -44,25 +102,29 @@
             "ctm_token": []
           }
         ],
+        "description": "Accepts any JSON payload submitted, and runs it through the defined list of Directives",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "handler",
+            "description": "name of a defined 'Webhook Handler' containing directives to apply to this payload",
+            "required": true
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "handler": {
-                    "type": "string",
-                    "description": "name of a defined 'Webhook Handler' containing directives to apply to this payload"
-                  }
-                },
-                "required": [
-                  "handler"
-                ]
-              }
+                "description": "any JSON payload"
+              },
+              "examples": {}
             }
           }
-        },
-        "description": "Accepts any JSON payload submitted, and runs it through the defined list of Directives"
+        }
       }
     },
     "/copy_project": {
@@ -155,11 +217,141 @@
     },
     "/add_cloud_keypair": {
       "post": {
-        "summary": "Adds a Key Pair to a Cloud",
+        "summary": "Adds a Key Pair to an existing Cloud",
         "operationId": "post-add_cloud_keypair",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "HasPassphrase",
+                          "HasPrivateKey",
+                          "ID",
+                          "Name"
+                        ],
+                        "properties": {
+                          "HasPassphrase": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "HasPrivateKey": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "ID": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "Name": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "ErrorCode": "",
+                      "ErrorDetail": "",
+                      "ErrorMessage": "",
+                      "Method": "add_cloud_keypair",
+                      "Response": [
+                        {
+                          "HasPassphrase": "true",
+                          "HasPrivateKey": "true",
+                          "ID": "603fe2f2ea75d44040dd421b",
+                          "Name": "Skytap"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Method": {
+                      "type": "string"
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "ErrorCode": "string",
+                      "ErrorDetail": "string",
+                      "ErrorMessage": "string",
+                      "Method": "string",
+                      "Response": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "security": [
@@ -209,7 +401,7 @@
             }
           }
         },
-        "description": "Adds a Key Pair to a Cloud"
+        "description": "Adds a Key Pair to an existing Cloud"
       }
     },
     "/add_object_tag": {
@@ -218,10 +410,106 @@
         "operationId": "post-add_object_tag",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "User Assignment Group": {
+                    "value": {
+                      "ErrorCode": "",
+                      "ErrorDetail": "",
+                      "ErrorMessage": "",
+                      "Method": "add_object_tag",
+                      "Response": "Assignment Group successfully added to object."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Method": {
+                      "type": "string"
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "No Token": {
+                    "value": {
+                      "ErrorCode": "Unauthorized",
+                      "ErrorDetail": "",
+                      "ErrorMessage": "Authentication Failure",
+                      "Method": "",
+                      "Response": ""
+                    }
+                  }
+                }
+              }
+            }
           }
         },
-        "description": "Adds a security Tag to an object\n\nValid and currently implemented `object_type` values are:\n\n* `User` = 1\n* `Asset` = 2\n* `Task` = 3\n* `Canvas Item` = 50",
+        "description": "Adds a security Tag to an object\n",
         "security": [
           {
             "ctm_token": []
@@ -242,8 +530,14 @@
                     "description": "The ID of the object"
                   },
                   "object_type": {
-                    "type": "string",
-                    "description": "The numeric type of the object"
+                    "type": "integer",
+                    "description": "The numeric type of the object",
+                    "enum": [
+                      "1",
+                      "2",
+                      "3",
+                      "50"
+                    ]
                   }
                 },
                 "required": [
@@ -251,9 +545,19 @@
                   "object_id",
                   "object_type"
                 ]
+              },
+              "examples": {
+                "Add Assignment Group to User": {
+                  "value": {
+                    "tag": "TagOne",
+                    "object_id": "gsfgstaj5h2ak8",
+                    "object_type": "1"
+                  }
+                }
               }
             }
-          }
+          },
+          "description": "Valid and currently implemented `object_type` values are:\n\n* 1 (User)\n* 2 (Asset)\n* 3 (Task)\n* 50 (Canvas Item)"
         },
         "parameters": []
       }
@@ -264,10 +568,120 @@
         "operationId": "post-add_project_source",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "object",
+                      "properties": {
+                        "Message": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "New Endpoint": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "Message",
+                        "New Endpoint"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "GitHub as source": {
+                    "value": {
+                      "ErrorCode": "",
+                      "ErrorDetail": "",
+                      "ErrorMessage": "",
+                      "Method": "add_project_source",
+                      "Response": {
+                        "Message": "[github] added as Source for Project [ProjectSourceTest]",
+                        "New Endpoint": "http://192.168.86.49:8080/api/submit_change?toproject=ProjectSourceTest&token=<api-token>"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "No Content Type": {
+                    "value": {
+                      "ErrorCode": "MissingParameter",
+                      "ErrorDetail": "Required parameter 'project' missing.",
+                      "ErrorMessage": "",
+                      "Method": "add_project_source",
+                      "Response": ""
+                    }
+                  }
+                }
+              }
+            }
           }
         },
-        "description": "Given a Project and an Origin this will mark a Project as a \"Source\" Project, mark the Origin as the Projects Changes from, and will return the webhook\n\nValid origin values and their definitions:\n- 'github' - GitHub Webhook\n- 'gitlab' - GitLab Webhook\n- 'ispw' - Compuware ISPW\n- 'tfsgit' - VSTS/TFS Git Webhook\n- 'tfvc' - VSTS/TFS TFVC Webhook\n- 'tfstfvs_soap' - VSTS/TFS 2013 SOAP Webhook\n- 'teamforgegit' - TeamForge Git Webhook\n- 'teamforgesvn' - TeamForge Subversion Webhook\n- 'bitbucket' - BitBucket Cloud Webhook\n- 'bitbucketserver' - BitBucket Server Webhook\n- 'other' - Continuum Format Webhook",
+        "description": "Given a Project and an Origin this will mark a Project as a \"Source\" Project, mark the Origin as the Project's 'Changes from', and will return the webhook.",
         "security": [
           {
             "ctm_token": []
@@ -311,8 +725,10 @@
                 ]
               }
             }
-          }
-        }
+          },
+          "description": "Valid origin values and their definitions:\n- 'github' - GitHub Webhook\n- 'gitlab' - GitLab Webhook\n- 'ispw' - Compuware ISPW\n- 'tfsgit' - VSTS/TFS Git Webhook\n- 'tfvc' - VSTS/TFS TFVC Webhook\n- 'tfstfvs_soap' - VSTS/TFS 2013 SOAP Webhook\n- 'teamforgegit' - TeamForge Git Webhook\n- 'teamforgesvn' - TeamForge Subversion Webhook\n- 'bitbucket' - BitBucket Cloud Webhook\n- 'bitbucketserver' - BitBucket Server Webhook\n- 'other' - Continuum Format Webhook"
+        },
+        "parameters": []
       }
     },
     "/add_team_user": {
@@ -3121,17 +3537,15 @@
       }
     },
     "/get_data_map": {
-      "get": {
+      "post": {
         "summary": "Gets list of data mappings",
-        "tags": [
-          "ToDo"
-        ],
+        "operationId": "post-get_data_map",
         "responses": {
           "200": {
             "description": "OK"
           }
         },
-        "operationId": "get-get_data_map",
+        "description": "Gets list of data mappings\n\nToDo: responses",
         "security": [
           {
             "ctm_token": []
@@ -3144,24 +3558,13 @@
                 "type": "object",
                 "properties": {
                   "mapping_id": {
-                    "type": "string",
-                    "description": "data mapping to return"
+                    "type": "string"
                   }
                 }
               }
             }
           },
           "description": "If no 'mapping_id' is supplied, return all mappings"
-        },
-        "description": "Gets list of data mappings\n\nToDo: responses"
-      },
-      "post": {
-        "summary": "",
-        "operationId": "post-get_data_map",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
         }
       }
     },
@@ -5326,17 +5729,2888 @@
         "operationId": "post-get_workitem",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "object",
+                      "required": [
+                        "_id",
+                        "artifacts",
+                        "buckets",
+                        "cc_duration",
+                        "cc_duration_label",
+                        "change_count",
+                        "changes",
+                        "created_by",
+                        "created_dt",
+                        "created_dt2",
+                        "environment_xrefs",
+                        "environments",
+                        "external_id",
+                        "external_key",
+                        "external_reporter",
+                        "external_reporter_name",
+                        "external_url",
+                        "fileobjects",
+                        "first_touch",
+                        "last_pi_id",
+                        "last_touch",
+                        "origin",
+                        "origin_url",
+                        "package_revisions",
+                        "packages",
+                        "pipeline_instances",
+                        "pipelines",
+                        "products",
+                        "progression_phases",
+                        "progressions",
+                        "projects",
+                        "source_project",
+                        "source_project_id",
+                        "source_submission_id",
+                        "status",
+                        "submissions",
+                        "team_id",
+                        "title",
+                        "type",
+                        "value_goal",
+                        "workitem"
+                      ],
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "artifacts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "buckets": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "added_dt": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "bucket": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "bucket_id": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "added_dt",
+                              "bucket",
+                              "bucket_id"
+                            ]
+                          }
+                        },
+                        "cc_duration": {
+                          "type": "number"
+                        },
+                        "cc_duration_label": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "change_count": {
+                          "type": "number"
+                        },
+                        "changes": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "branch": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "contributor_name": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "created_dt": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "created_dt2": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "external_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "external_url": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "message": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "origin": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "origin_repo": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "source_group": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "source_project": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "source_project_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "submission_id": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "_id",
+                              "branch",
+                              "contributor_name",
+                              "created_dt",
+                              "created_dt2",
+                              "external_id",
+                              "external_url",
+                              "message",
+                              "origin",
+                              "origin_repo",
+                              "source_group",
+                              "source_project",
+                              "source_project_id",
+                              "submission_id"
+                            ]
+                          }
+                        },
+                        "created_by": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "created_dt": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "created_dt2": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "environment_xrefs": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "artifacts": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object"
+                                }
+                              },
+                              "changes": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object"
+                                }
+                              },
+                              "created_by": {
+                                "type": "object",
+                                "properties": {
+                                  "pi_id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "pi_name": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "pi_id",
+                                  "pi_name"
+                                ]
+                              },
+                              "created_by_type": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "created_dt": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "created_dt2": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "item": {
+                                "type": "object",
+                                "properties": {
+                                  "full_version": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "package_id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "package_name": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "revision": {
+                                    "type": "number"
+                                  },
+                                  "revision_id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "version": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "full_version",
+                                  "package_id",
+                                  "package_name",
+                                  "revision",
+                                  "revision_id",
+                                  "version"
+                                ]
+                              },
+                              "item_type": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "target": {
+                                "type": "object",
+                                "properties": {
+                                  "delivery_category": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "environment_id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "host": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "path": {
+                                    "type": "string"
+                                  },
+                                  "url": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "delivery_category",
+                                  "description",
+                                  "environment_id",
+                                  "host",
+                                  "name",
+                                  "path",
+                                  "url"
+                                ]
+                              },
+                              "target_type": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "workitems": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object"
+                                }
+                              }
+                            },
+                            "required": [
+                              "_id",
+                              "created_by_type",
+                              "created_dt",
+                              "created_dt2",
+                              "item_type",
+                              "target_type"
+                            ]
+                          }
+                        },
+                        "environments": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "created_dt": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "created_dt2": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "delivery_category": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "last_update_dt": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "last_update_dt2": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "status": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "_id",
+                              "created_dt",
+                              "created_dt2",
+                              "delivery_category",
+                              "last_update_dt",
+                              "last_update_dt2",
+                              "name",
+                              "status"
+                            ]
+                          }
+                        },
+                        "external_id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "external_key": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "external_reporter": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "external_reporter_name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "external_url": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "fileobjects": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "full_path": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "object_name": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "object_path": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "repository": {
+                                "type": "object",
+                                "properties": {
+                                  "full_name": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "url": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "full_name",
+                                  "name",
+                                  "url"
+                                ]
+                              },
+                              "risk_factor": {
+                                "type": "number"
+                              },
+                              "source_project": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "_id",
+                              "full_path",
+                              "object_name",
+                              "object_path",
+                              "risk_factor",
+                              "source_project"
+                            ]
+                          }
+                        },
+                        "first_touch": {
+                          "type": "object",
+                          "required": [
+                            "date",
+                            "date2",
+                            "group",
+                            "name",
+                            "pi_id",
+                            "pipeline_id",
+                            "project",
+                            "project_id"
+                          ],
+                          "properties": {
+                            "date": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "date2": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "group": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "pi_id": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "pipeline_id": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "project": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "project_id": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        },
+                        "last_pi_id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "last_touch": {
+                          "type": "object",
+                          "required": [
+                            "date",
+                            "date2",
+                            "group",
+                            "name",
+                            "pi_id",
+                            "pipeline_id",
+                            "project",
+                            "project_id"
+                          ],
+                          "properties": {
+                            "date": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "date2": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "group": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "pi_id": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "pipeline_id": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "project": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "project_id": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        },
+                        "origin": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "origin_url": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "package_revisions": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "created_dt": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "full_version": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "package_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "revision": {
+                                "type": "number"
+                              },
+                              "revision_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "version": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "created_dt",
+                              "full_version",
+                              "name",
+                              "package_id",
+                              "revision",
+                              "revision_id",
+                              "version"
+                            ]
+                          }
+                        },
+                        "packages": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "actions": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object"
+                                }
+                              },
+                              "artifacts": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object"
+                                }
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "globals": {
+                                "type": "object",
+                                "properties": {
+                                  "failed_tests_threshold": {
+                                    "type": "number"
+                                  },
+                                  "phase_thresholds": {
+                                    "type": "string"
+                                  },
+                                  "project": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "you_can_put": {
+                                    "type": "object",
+                                    "required": [
+                                      "anything_in",
+                                      "so"
+                                    ],
+                                    "properties": {
+                                      "anything_in": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "so": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      }
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "failed_tests_threshold",
+                                  "phase_thresholds",
+                                  "project",
+                                  "you_can_put"
+                                ]
+                              },
+                              "last_revised_by": {
+                                "type": "object",
+                                "properties": {
+                                  "_id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "_id",
+                                  "type"
+                                ]
+                              },
+                              "last_revision": {
+                                "type": "number"
+                              },
+                              "last_revision_dt": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "progression_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "team_id": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "_id",
+                              "description",
+                              "last_revision",
+                              "last_revision_dt",
+                              "name",
+                              "progression_id",
+                              "team_id"
+                            ]
+                          }
+                        },
+                        "pipeline_instances": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "definition": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "duration": {
+                                "type": "number"
+                              },
+                              "duration_label": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "end_dt": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "group": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "initiated_by": {
+                                "type": "object",
+                                "properties": {
+                                  "category": {},
+                                  "index": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "package_revision": {
+                                    "type": "object",
+                                    "required": [
+                                      "full_version",
+                                      "name",
+                                      "promoted_by",
+                                      "revision",
+                                      "revision_id",
+                                      "version"
+                                    ],
+                                    "properties": {
+                                      "full_version": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "name": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "promoted_by": {
+                                        "type": "object",
+                                        "required": [
+                                          "data",
+                                          "phase_name",
+                                          "promoted_dt",
+                                          "submission_id",
+                                          "submission_type",
+                                          "type"
+                                        ],
+                                        "properties": {
+                                          "data": {
+                                            "type": "object",
+                                            "required": [
+                                              "LOGFILE_ID",
+                                              "REQUEST_HEADERS",
+                                              "X_EVENT_TYPE",
+                                              "_fake",
+                                              "_id",
+                                              "_load_number",
+                                              "_package",
+                                              "_package_label",
+                                              "_package_version",
+                                              "_project_name",
+                                              "after",
+                                              "before",
+                                              "branch",
+                                              "commits",
+                                              "pusher",
+                                              "ref",
+                                              "repository",
+                                              "team_id",
+                                              "toproject",
+                                              "toproject_id"
+                                            ],
+                                            "properties": {
+                                              "LOGFILE_ID": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "REQUEST_HEADERS": {
+                                                "type": "object",
+                                                "required": [
+                                                  "ACTUAL_SERVER_PROTOCOL",
+                                                  "CONTENT_TYPE",
+                                                  "HTTP_ACCEPT",
+                                                  "HTTP_ACCEPT_ENCODING",
+                                                  "HTTP_AUTHORIZATION",
+                                                  "HTTP_CONNECTION",
+                                                  "HTTP_HOST",
+                                                  "HTTP_USER_AGENT",
+                                                  "HTTP_X_GITLAB_EVENT",
+                                                  "PATH_INFO",
+                                                  "QUERY_STRING",
+                                                  "REMOTE_ADDR",
+                                                  "REMOTE_PORT",
+                                                  "REQUEST_METHOD",
+                                                  "REQUEST_URI",
+                                                  "SERVER_NAME",
+                                                  "SERVER_PORT",
+                                                  "SERVER_PROTOCOL"
+                                                ],
+                                                "properties": {
+                                                  "ACTUAL_SERVER_PROTOCOL": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "CONTENT_TYPE": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "HTTP_ACCEPT": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "HTTP_ACCEPT_ENCODING": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "HTTP_AUTHORIZATION": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "HTTP_CONNECTION": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "HTTP_HOST": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "HTTP_USER_AGENT": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "HTTP_X_GITLAB_EVENT": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "PATH_INFO": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "QUERY_STRING": {
+                                                    "type": "string"
+                                                  },
+                                                  "REMOTE_ADDR": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "REMOTE_PORT": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "REQUEST_METHOD": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "REQUEST_URI": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "SERVER_NAME": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "SERVER_PORT": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "SERVER_PROTOCOL": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  }
+                                                }
+                                              },
+                                              "X_EVENT_TYPE": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "_fake": {
+                                                "type": "boolean"
+                                              },
+                                              "_id": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "_load_number": {
+                                                "type": "number"
+                                              },
+                                              "_package": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "_package_label": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "_package_version": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "_project_name": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "after": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "before": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "branch": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "commits": {
+                                                "type": "array",
+                                                "uniqueItems": true,
+                                                "minItems": 1,
+                                                "items": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "_fake": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "added": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "object"
+                                                      }
+                                                    },
+                                                    "author": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "email": {
+                                                          "type": "string",
+                                                          "minLength": 1
+                                                        },
+                                                        "name": {
+                                                          "type": "string",
+                                                          "minLength": 1
+                                                        },
+                                                        "username": {
+                                                          "type": "string",
+                                                          "minLength": 1
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "email",
+                                                        "name",
+                                                        "username"
+                                                      ]
+                                                    },
+                                                    "committer": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "email": {
+                                                          "type": "string",
+                                                          "minLength": 1
+                                                        },
+                                                        "name": {
+                                                          "type": "string",
+                                                          "minLength": 1
+                                                        },
+                                                        "username": {
+                                                          "type": "string",
+                                                          "minLength": 1
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "email",
+                                                        "name",
+                                                        "username"
+                                                      ]
+                                                    },
+                                                    "id": {
+                                                      "type": "string",
+                                                      "minLength": 1
+                                                    },
+                                                    "message": {
+                                                      "type": "string",
+                                                      "minLength": 1
+                                                    },
+                                                    "modified": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "object"
+                                                      }
+                                                    },
+                                                    "removed": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "object"
+                                                      }
+                                                    },
+                                                    "timestamp": {
+                                                      "type": "string",
+                                                      "minLength": 1
+                                                    },
+                                                    "url": {
+                                                      "type": "string",
+                                                      "minLength": 1
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "_fake",
+                                                    "id",
+                                                    "message",
+                                                    "timestamp",
+                                                    "url"
+                                                  ]
+                                                }
+                                              },
+                                              "pusher": {
+                                                "type": "object",
+                                                "required": [
+                                                  "email",
+                                                  "name"
+                                                ],
+                                                "properties": {
+                                                  "email": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "name": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  }
+                                                }
+                                              },
+                                              "ref": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "repository": {
+                                                "type": "object",
+                                                "required": [
+                                                  "full_name",
+                                                  "id",
+                                                  "name",
+                                                  "url"
+                                                ],
+                                                "properties": {
+                                                  "full_name": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "id": {
+                                                    "type": "number"
+                                                  },
+                                                  "name": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "url": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  }
+                                                }
+                                              },
+                                              "team_id": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "toproject": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "toproject_id": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              }
+                                            }
+                                          },
+                                          "phase_name": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "promoted_dt": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "submission_id": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "submission_type": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "type": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          }
+                                        }
+                                      },
+                                      "revision": {
+                                        "type": "number"
+                                      },
+                                      "revision_id": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "version": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      }
+                                    }
+                                  },
+                                  "phase": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "status_id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "index",
+                                  "name",
+                                  "package_revision",
+                                  "phase",
+                                  "status_id",
+                                  "type"
+                                ]
+                              },
+                              "name": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "number": {
+                                "type": "number"
+                              },
+                              "project": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "start_dt": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "start_dt2": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "status": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "_id",
+                              "definition",
+                              "duration",
+                              "duration_label",
+                              "end_dt",
+                              "group",
+                              "name",
+                              "number",
+                              "project",
+                              "start_dt",
+                              "start_dt2",
+                              "status"
+                            ]
+                          }
+                        },
+                        "pipelines": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "definition": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "group": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "instances": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object"
+                                }
+                              },
+                              "last_pi": {
+                                "type": "object",
+                                "properties": {
+                                  "_id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "avg_duration": {
+                                    "type": "number"
+                                  },
+                                  "avg_duration_label": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "category": {
+                                    "type": "string"
+                                  },
+                                  "ce_node": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "changes": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object"
+                                    }
+                                  },
+                                  "code": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "duration": {
+                                    "type": "number"
+                                  },
+                                  "duration_label": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "end_dt": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "end_dt2": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "group": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "initiated_by": {
+                                    "type": "object",
+                                    "required": [
+                                      "index",
+                                      "name",
+                                      "package_revision",
+                                      "phase",
+                                      "status_id",
+                                      "type"
+                                    ],
+                                    "properties": {
+                                      "category": {},
+                                      "index": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "name": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "package_revision": {
+                                        "type": "object",
+                                        "required": [
+                                          "full_version",
+                                          "name",
+                                          "promoted_by",
+                                          "revision",
+                                          "revision_id",
+                                          "version"
+                                        ],
+                                        "properties": {
+                                          "full_version": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "name": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "promoted_by": {
+                                            "type": "object",
+                                            "required": [
+                                              "data",
+                                              "phase_name",
+                                              "promoted_dt",
+                                              "submission_id",
+                                              "submission_type",
+                                              "type"
+                                            ],
+                                            "properties": {
+                                              "data": {
+                                                "type": "object",
+                                                "required": [
+                                                  "LOGFILE_ID",
+                                                  "REQUEST_HEADERS",
+                                                  "X_EVENT_TYPE",
+                                                  "_fake",
+                                                  "_id",
+                                                  "_load_number",
+                                                  "_package",
+                                                  "_package_label",
+                                                  "_package_version",
+                                                  "_project_name",
+                                                  "after",
+                                                  "before",
+                                                  "branch",
+                                                  "commits",
+                                                  "pusher",
+                                                  "ref",
+                                                  "repository",
+                                                  "team_id",
+                                                  "toproject",
+                                                  "toproject_id"
+                                                ],
+                                                "properties": {
+                                                  "LOGFILE_ID": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "REQUEST_HEADERS": {
+                                                    "type": "object",
+                                                    "required": [
+                                                      "ACTUAL_SERVER_PROTOCOL",
+                                                      "CONTENT_TYPE",
+                                                      "HTTP_ACCEPT",
+                                                      "HTTP_ACCEPT_ENCODING",
+                                                      "HTTP_AUTHORIZATION",
+                                                      "HTTP_CONNECTION",
+                                                      "HTTP_HOST",
+                                                      "HTTP_USER_AGENT",
+                                                      "HTTP_X_GITLAB_EVENT",
+                                                      "PATH_INFO",
+                                                      "QUERY_STRING",
+                                                      "REMOTE_ADDR",
+                                                      "REMOTE_PORT",
+                                                      "REQUEST_METHOD",
+                                                      "REQUEST_URI",
+                                                      "SERVER_NAME",
+                                                      "SERVER_PORT",
+                                                      "SERVER_PROTOCOL"
+                                                    ],
+                                                    "properties": {
+                                                      "ACTUAL_SERVER_PROTOCOL": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "CONTENT_TYPE": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "HTTP_ACCEPT": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "HTTP_ACCEPT_ENCODING": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "HTTP_AUTHORIZATION": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "HTTP_CONNECTION": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "HTTP_HOST": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "HTTP_USER_AGENT": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "HTTP_X_GITLAB_EVENT": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "PATH_INFO": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "QUERY_STRING": {
+                                                        "type": "string"
+                                                      },
+                                                      "REMOTE_ADDR": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "REMOTE_PORT": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "REQUEST_METHOD": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "REQUEST_URI": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "SERVER_NAME": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "SERVER_PORT": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "SERVER_PROTOCOL": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      }
+                                                    }
+                                                  },
+                                                  "X_EVENT_TYPE": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "_fake": {
+                                                    "type": "boolean"
+                                                  },
+                                                  "_id": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "_load_number": {
+                                                    "type": "number"
+                                                  },
+                                                  "_package": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "_package_label": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "_package_version": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "_project_name": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "after": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "before": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "branch": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "commits": {
+                                                    "type": "array",
+                                                    "uniqueItems": true,
+                                                    "minItems": 1,
+                                                    "items": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "_fake": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "added": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "object"
+                                                          }
+                                                        },
+                                                        "author": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "email": {
+                                                              "type": "string",
+                                                              "minLength": 1
+                                                            },
+                                                            "name": {
+                                                              "type": "string",
+                                                              "minLength": 1
+                                                            },
+                                                            "username": {
+                                                              "type": "string",
+                                                              "minLength": 1
+                                                            }
+                                                          },
+                                                          "required": [
+                                                            "email",
+                                                            "name",
+                                                            "username"
+                                                          ]
+                                                        },
+                                                        "committer": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "email": {
+                                                              "type": "string",
+                                                              "minLength": 1
+                                                            },
+                                                            "name": {
+                                                              "type": "string",
+                                                              "minLength": 1
+                                                            },
+                                                            "username": {
+                                                              "type": "string",
+                                                              "minLength": 1
+                                                            }
+                                                          },
+                                                          "required": [
+                                                            "email",
+                                                            "name",
+                                                            "username"
+                                                          ]
+                                                        },
+                                                        "id": {
+                                                          "type": "string",
+                                                          "minLength": 1
+                                                        },
+                                                        "message": {
+                                                          "type": "string",
+                                                          "minLength": 1
+                                                        },
+                                                        "modified": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "object"
+                                                          }
+                                                        },
+                                                        "removed": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "object"
+                                                          }
+                                                        },
+                                                        "timestamp": {
+                                                          "type": "string",
+                                                          "minLength": 1
+                                                        },
+                                                        "url": {
+                                                          "type": "string",
+                                                          "minLength": 1
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "_fake",
+                                                        "id",
+                                                        "message",
+                                                        "timestamp",
+                                                        "url"
+                                                      ]
+                                                    }
+                                                  },
+                                                  "pusher": {
+                                                    "type": "object",
+                                                    "required": [
+                                                      "email",
+                                                      "name"
+                                                    ],
+                                                    "properties": {
+                                                      "email": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "name": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      }
+                                                    }
+                                                  },
+                                                  "ref": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "repository": {
+                                                    "type": "object",
+                                                    "required": [
+                                                      "full_name",
+                                                      "id",
+                                                      "name",
+                                                      "url"
+                                                    ],
+                                                    "properties": {
+                                                      "full_name": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "id": {
+                                                        "type": "number"
+                                                      },
+                                                      "name": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      },
+                                                      "url": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                      }
+                                                    }
+                                                  },
+                                                  "team_id": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "toproject": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  },
+                                                  "toproject_id": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                  }
+                                                }
+                                              },
+                                              "phase_name": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "promoted_dt": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "submission_id": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "submission_type": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              },
+                                              "type": {
+                                                "type": "string",
+                                                "minLength": 1
+                                              }
+                                            }
+                                          },
+                                          "revision": {
+                                            "type": "number"
+                                          },
+                                          "revision_id": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "version": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          }
+                                        }
+                                      },
+                                      "phase": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "status_id": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "type": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      }
+                                    }
+                                  },
+                                  "labels": {
+                                    "type": "array",
+                                    "uniqueItems": true,
+                                    "minItems": 1,
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "name": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "value": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        }
+                                      },
+                                      "required": [
+                                        "name",
+                                        "value"
+                                      ]
+                                    }
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "number": {
+                                    "type": "number"
+                                  },
+                                  "phases": {
+                                    "type": "array",
+                                    "uniqueItems": true,
+                                    "minItems": 1,
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "duration": {
+                                          "type": "number"
+                                        },
+                                        "duration_label": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "end_dt": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "end_dt2": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "name": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "start_dt": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "start_dt2": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "status": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        }
+                                      },
+                                      "required": [
+                                        "duration",
+                                        "duration_label",
+                                        "end_dt",
+                                        "end_dt2",
+                                        "name",
+                                        "start_dt",
+                                        "start_dt2",
+                                        "status"
+                                      ]
+                                    }
+                                  },
+                                  "pi_group_id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "pipeline_id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "pipeline_name": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "pipeline_team_id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "project": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "project_id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "project_team_id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "project_version": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "start_dt": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "start_dt2": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "summary": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object"
+                                    }
+                                  },
+                                  "workitems": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object"
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "_id",
+                                  "avg_duration",
+                                  "avg_duration_label",
+                                  "category",
+                                  "ce_node",
+                                  "changes",
+                                  "code",
+                                  "duration",
+                                  "duration_label",
+                                  "end_dt",
+                                  "end_dt2",
+                                  "group",
+                                  "initiated_by",
+                                  "labels",
+                                  "name",
+                                  "number",
+                                  "phases",
+                                  "pi_group_id",
+                                  "pipeline_id",
+                                  "pipeline_name",
+                                  "pipeline_team_id",
+                                  "project",
+                                  "project_id",
+                                  "project_team_id",
+                                  "project_version",
+                                  "start_dt",
+                                  "start_dt2",
+                                  "status",
+                                  "summary",
+                                  "workitems"
+                                ]
+                              },
+                              "last_pi_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "pi_group_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "pipeline_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "project": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "project_id": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "definition",
+                              "group",
+                              "last_pi_id",
+                              "pi_group_id",
+                              "pipeline_id",
+                              "project",
+                              "project_id"
+                            ]
+                          }
+                        },
+                        "products": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "product": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "product_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "version": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "version_rc": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "product",
+                              "product_id",
+                              "version",
+                              "version_rc"
+                            ]
+                          }
+                        },
+                        "progression_phases": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "code_complete": {
+                                "type": "boolean"
+                              },
+                              "delivery_category": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "from_revision": {
+                                "type": "number"
+                              },
+                              "from_revision_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "progression_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "progression_name": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "to_revision": {
+                                "type": "number"
+                              },
+                              "to_revision_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "via_package_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "via_package_name": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "via_package_version": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "code_complete",
+                              "delivery_category",
+                              "from_revision",
+                              "from_revision_id",
+                              "name",
+                              "progression_id",
+                              "progression_name",
+                              "to_revision",
+                              "to_revision_id",
+                              "via_package_id",
+                              "via_package_name",
+                              "via_package_version"
+                            ]
+                          }
+                        },
+                        "progressions": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "progression_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "progression_name": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "via_package_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "via_package_name": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "progression_id",
+                              "progression_name",
+                              "via_package_id",
+                              "via_package_name"
+                            ]
+                          }
+                        },
+                        "projects": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "project": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "project_id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "version": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "project",
+                              "project_id",
+                              "version"
+                            ]
+                          }
+                        },
+                        "source_project": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source_project_id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source_project_version": {},
+                        "source_submission_id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "submissions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "team_id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "value_goal": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "workitem": {
+                          "type": "object",
+                          "required": [
+                            "BlockingIssuesCount",
+                            "CompletedInBuildRuns",
+                            "CreatedBy_Name",
+                            "CreatedBy_Username",
+                            "DependenciesClosedCount",
+                            "DependenciesCount",
+                            "Description",
+                            "EffectiveAssetState",
+                            "IsClosed",
+                            "Name",
+                            "Number",
+                            "Status_Name",
+                            "SuperBlockingIssuesCount",
+                            "SuperClosedPWIsCount",
+                            "SuperPWIsBlockingIssuesCount",
+                            "SuperTotalPWIsCount",
+                            "Team_Name",
+                            "_oid"
+                          ],
+                          "properties": {
+                            "BlockingIssuesCount": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "CompletedInBuildRuns": {
+                              "type": "array",
+                              "items": {
+                                "type": "object"
+                              }
+                            },
+                            "CreatedBy_Name": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "CreatedBy_Username": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "DependenciesClosedCount": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "DependenciesCount": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "Description": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "EffectiveAssetState": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "IsClosed": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "Name": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "Number": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "Status_Name": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "SuperBlockingIssuesCount": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "SuperClosedPWIsCount": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "SuperPWIsBlockingIssuesCount": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "SuperTotalPWIsCount": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "Team_Name": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "_oid": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "Story": {
+                    "value": {
+                      "ErrorCode": "string",
+                      "ErrorDetail": "string",
+                      "ErrorMessage": "string",
+                      "Method": "string",
+                      "Response": {
+                        "_id": "string",
+                        "artifacts": [
+                          {}
+                        ],
+                        "buckets": [
+                          {
+                            "added_dt": "string",
+                            "bucket": "string",
+                            "bucket_id": "string"
+                          }
+                        ],
+                        "cc_duration": 0,
+                        "cc_duration_label": "string",
+                        "change_count": 0,
+                        "changes": [
+                          {
+                            "_id": "string",
+                            "branch": "string",
+                            "contributor_name": "string",
+                            "created_dt": "string",
+                            "created_dt2": "string",
+                            "external_id": "string",
+                            "external_url": "string",
+                            "message": "string",
+                            "origin": "string",
+                            "origin_repo": "string",
+                            "source_group": "string",
+                            "source_project": "string",
+                            "source_project_id": "string",
+                            "submission_id": "string"
+                          }
+                        ],
+                        "created_by": "string",
+                        "created_dt": "string",
+                        "created_dt2": "string",
+                        "environment_xrefs": [
+                          {
+                            "_id": "string",
+                            "artifacts": [
+                              {}
+                            ],
+                            "changes": [
+                              {}
+                            ],
+                            "created_by": {
+                              "pi_id": "string",
+                              "pi_name": "string"
+                            },
+                            "created_by_type": "string",
+                            "created_dt": "string",
+                            "created_dt2": "string",
+                            "item": {
+                              "full_version": "string",
+                              "package_id": "string",
+                              "package_name": "string",
+                              "revision": 0,
+                              "revision_id": "string",
+                              "version": "string"
+                            },
+                            "item_type": "string",
+                            "target": {
+                              "delivery_category": "string",
+                              "description": "string",
+                              "environment_id": "string",
+                              "host": "string",
+                              "name": "string",
+                              "path": "string",
+                              "url": "string"
+                            },
+                            "target_type": "string",
+                            "workitems": [
+                              {}
+                            ]
+                          }
+                        ],
+                        "environments": [
+                          {
+                            "_id": "string",
+                            "created_dt": "string",
+                            "created_dt2": "string",
+                            "delivery_category": "string",
+                            "last_update_dt": "string",
+                            "last_update_dt2": "string",
+                            "name": "string",
+                            "status": "string"
+                          }
+                        ],
+                        "external_id": "string",
+                        "external_key": "string",
+                        "external_reporter": "string",
+                        "external_reporter_name": "string",
+                        "external_url": "string",
+                        "fileobjects": [
+                          {
+                            "_id": "string",
+                            "full_path": "string",
+                            "object_name": "string",
+                            "object_path": "string",
+                            "repository": {
+                              "full_name": "string",
+                              "name": "string",
+                              "url": "string"
+                            },
+                            "risk_factor": 0,
+                            "source_project": "string"
+                          }
+                        ],
+                        "first_touch": {
+                          "date": "string",
+                          "date2": "string",
+                          "group": "string",
+                          "name": "string",
+                          "pi_id": "string",
+                          "pipeline_id": "string",
+                          "project": "string",
+                          "project_id": "string"
+                        },
+                        "last_pi_id": "string",
+                        "last_touch": {
+                          "date": "string",
+                          "date2": "string",
+                          "group": "string",
+                          "name": "string",
+                          "pi_id": "string",
+                          "pipeline_id": "string",
+                          "project": "string",
+                          "project_id": "string"
+                        },
+                        "origin": "string",
+                        "origin_url": "string",
+                        "package_revisions": [
+                          {
+                            "created_dt": "string",
+                            "full_version": "string",
+                            "name": "string",
+                            "package_id": "string",
+                            "revision": 0,
+                            "revision_id": "string",
+                            "version": "string"
+                          }
+                        ],
+                        "packages": [
+                          {
+                            "_id": "string",
+                            "actions": [
+                              {}
+                            ],
+                            "artifacts": [
+                              {}
+                            ],
+                            "description": "string",
+                            "globals": {
+                              "failed_tests_threshold": 0,
+                              "phase_thresholds": "string",
+                              "project": "string",
+                              "you_can_put": {
+                                "anything_in": "string",
+                                "so": "string"
+                              }
+                            },
+                            "last_revised_by": {
+                              "_id": "string",
+                              "type": "string"
+                            },
+                            "last_revision": 0,
+                            "last_revision_dt": "string",
+                            "name": "string",
+                            "progression_id": "string",
+                            "team_id": "string"
+                          }
+                        ],
+                        "pipeline_instances": [
+                          {
+                            "_id": "string",
+                            "definition": "string",
+                            "duration": 0,
+                            "duration_label": "string",
+                            "end_dt": "string",
+                            "group": "string",
+                            "initiated_by": {
+                              "category": null,
+                              "index": "string",
+                              "name": "string",
+                              "package_revision": {
+                                "full_version": "string",
+                                "name": "string",
+                                "promoted_by": {
+                                  "data": {
+                                    "LOGFILE_ID": "string",
+                                    "REQUEST_HEADERS": {
+                                      "ACTUAL_SERVER_PROTOCOL": "string",
+                                      "CONTENT_TYPE": "string",
+                                      "HTTP_ACCEPT": "string",
+                                      "HTTP_ACCEPT_ENCODING": "string",
+                                      "HTTP_AUTHORIZATION": "string",
+                                      "HTTP_CONNECTION": "string",
+                                      "HTTP_HOST": "string",
+                                      "HTTP_USER_AGENT": "string",
+                                      "HTTP_X_GITLAB_EVENT": "string",
+                                      "PATH_INFO": "string",
+                                      "QUERY_STRING": "string",
+                                      "REMOTE_ADDR": "string",
+                                      "REMOTE_PORT": "string",
+                                      "REQUEST_METHOD": "string",
+                                      "REQUEST_URI": "string",
+                                      "SERVER_NAME": "string",
+                                      "SERVER_PORT": "string",
+                                      "SERVER_PROTOCOL": "string"
+                                    },
+                                    "X_EVENT_TYPE": "string",
+                                    "_fake": true,
+                                    "_id": "string",
+                                    "_load_number": 0,
+                                    "_package": "string",
+                                    "_package_label": "string",
+                                    "_package_version": "string",
+                                    "_project_name": "string",
+                                    "after": "string",
+                                    "before": "string",
+                                    "branch": "string",
+                                    "commits": [
+                                      {
+                                        "_fake": true,
+                                        "added": [
+                                          {}
+                                        ],
+                                        "author": {
+                                          "email": "string",
+                                          "name": "string",
+                                          "username": "string"
+                                        },
+                                        "committer": {
+                                          "email": "string",
+                                          "name": "string",
+                                          "username": "string"
+                                        },
+                                        "id": "string",
+                                        "message": "string",
+                                        "modified": [
+                                          {}
+                                        ],
+                                        "removed": [
+                                          {}
+                                        ],
+                                        "timestamp": "string",
+                                        "url": "string"
+                                      }
+                                    ],
+                                    "pusher": {
+                                      "email": "string",
+                                      "name": "string"
+                                    },
+                                    "ref": "string",
+                                    "repository": {
+                                      "full_name": "string",
+                                      "id": 0,
+                                      "name": "string",
+                                      "url": "string"
+                                    },
+                                    "team_id": "string",
+                                    "toproject": "string",
+                                    "toproject_id": "string"
+                                  },
+                                  "phase_name": "string",
+                                  "promoted_dt": "string",
+                                  "submission_id": "string",
+                                  "submission_type": "string",
+                                  "type": "string"
+                                },
+                                "revision": 0,
+                                "revision_id": "string",
+                                "version": "string"
+                              },
+                              "phase": "string",
+                              "status_id": "string",
+                              "type": "string"
+                            },
+                            "name": "string",
+                            "number": 0,
+                            "project": "string",
+                            "start_dt": "string",
+                            "start_dt2": "string",
+                            "status": "string"
+                          }
+                        ],
+                        "pipelines": [
+                          {
+                            "definition": "string",
+                            "group": "string",
+                            "instances": [
+                              {}
+                            ],
+                            "last_pi": {
+                              "_id": "string",
+                              "avg_duration": 0,
+                              "avg_duration_label": "string",
+                              "category": "string",
+                              "ce_node": "string",
+                              "changes": [
+                                {}
+                              ],
+                              "code": "string",
+                              "duration": 0,
+                              "duration_label": "string",
+                              "end_dt": "string",
+                              "end_dt2": "string",
+                              "group": "string",
+                              "initiated_by": {
+                                "category": null,
+                                "index": "string",
+                                "name": "string",
+                                "package_revision": {
+                                  "full_version": "string",
+                                  "name": "string",
+                                  "promoted_by": {
+                                    "data": {
+                                      "LOGFILE_ID": "string",
+                                      "REQUEST_HEADERS": {
+                                        "ACTUAL_SERVER_PROTOCOL": "string",
+                                        "CONTENT_TYPE": "string",
+                                        "HTTP_ACCEPT": "string",
+                                        "HTTP_ACCEPT_ENCODING": "string",
+                                        "HTTP_AUTHORIZATION": "string",
+                                        "HTTP_CONNECTION": "string",
+                                        "HTTP_HOST": "string",
+                                        "HTTP_USER_AGENT": "string",
+                                        "HTTP_X_GITLAB_EVENT": "string",
+                                        "PATH_INFO": "string",
+                                        "QUERY_STRING": "string",
+                                        "REMOTE_ADDR": "string",
+                                        "REMOTE_PORT": "string",
+                                        "REQUEST_METHOD": "string",
+                                        "REQUEST_URI": "string",
+                                        "SERVER_NAME": "string",
+                                        "SERVER_PORT": "string",
+                                        "SERVER_PROTOCOL": "string"
+                                      },
+                                      "X_EVENT_TYPE": "string",
+                                      "_fake": true,
+                                      "_id": "string",
+                                      "_load_number": 0,
+                                      "_package": "string",
+                                      "_package_label": "string",
+                                      "_package_version": "string",
+                                      "_project_name": "string",
+                                      "after": "string",
+                                      "before": "string",
+                                      "branch": "string",
+                                      "commits": [
+                                        {
+                                          "_fake": true,
+                                          "added": [
+                                            {}
+                                          ],
+                                          "author": {
+                                            "email": "string",
+                                            "name": "string",
+                                            "username": "string"
+                                          },
+                                          "committer": {
+                                            "email": "string",
+                                            "name": "string",
+                                            "username": "string"
+                                          },
+                                          "id": "string",
+                                          "message": "string",
+                                          "modified": [
+                                            {}
+                                          ],
+                                          "removed": [
+                                            {}
+                                          ],
+                                          "timestamp": "string",
+                                          "url": "string"
+                                        }
+                                      ],
+                                      "pusher": {
+                                        "email": "string",
+                                        "name": "string"
+                                      },
+                                      "ref": "string",
+                                      "repository": {
+                                        "full_name": "string",
+                                        "id": 0,
+                                        "name": "string",
+                                        "url": "string"
+                                      },
+                                      "team_id": "string",
+                                      "toproject": "string",
+                                      "toproject_id": "string"
+                                    },
+                                    "phase_name": "string",
+                                    "promoted_dt": "string",
+                                    "submission_id": "string",
+                                    "submission_type": "string",
+                                    "type": "string"
+                                  },
+                                  "revision": 0,
+                                  "revision_id": "string",
+                                  "version": "string"
+                                },
+                                "phase": "string",
+                                "status_id": "string",
+                                "type": "string"
+                              },
+                              "labels": [
+                                {
+                                  "name": "string",
+                                  "value": "string"
+                                }
+                              ],
+                              "name": "string",
+                              "number": 0,
+                              "phases": [
+                                {
+                                  "duration": 0,
+                                  "duration_label": "string",
+                                  "end_dt": "string",
+                                  "end_dt2": "string",
+                                  "name": "string",
+                                  "start_dt": "string",
+                                  "start_dt2": "string",
+                                  "status": "string"
+                                }
+                              ],
+                              "pi_group_id": "string",
+                              "pipeline_id": "string",
+                              "pipeline_name": "string",
+                              "pipeline_team_id": "string",
+                              "project": "string",
+                              "project_id": "string",
+                              "project_team_id": "string",
+                              "project_version": "string",
+                              "start_dt": "string",
+                              "start_dt2": "string",
+                              "status": "string",
+                              "summary": [
+                                {}
+                              ],
+                              "workitems": [
+                                {}
+                              ]
+                            },
+                            "last_pi_id": "string",
+                            "pi_group_id": "string",
+                            "pipeline_id": "string",
+                            "project": "string",
+                            "project_id": "string"
+                          }
+                        ],
+                        "products": [
+                          {
+                            "product": "string",
+                            "product_id": "string",
+                            "version": "string",
+                            "version_rc": 0
+                          }
+                        ],
+                        "progression_phases": [
+                          {
+                            "code_complete": true,
+                            "delivery_category": "string",
+                            "from_revision": 0,
+                            "from_revision_id": "string",
+                            "name": "string",
+                            "progression_id": "string",
+                            "progression_name": "string",
+                            "to_revision": 0,
+                            "to_revision_id": "string",
+                            "via_package_id": "string",
+                            "via_package_name": "string",
+                            "via_package_version": "string"
+                          }
+                        ],
+                        "progressions": [
+                          {
+                            "progression_id": "string",
+                            "progression_name": "string",
+                            "via_package_id": "string",
+                            "via_package_name": "string"
+                          }
+                        ],
+                        "projects": [
+                          {
+                            "project": "string",
+                            "project_id": "string",
+                            "version": "string"
+                          }
+                        ],
+                        "source_project": "string",
+                        "source_project_id": "string",
+                        "source_project_version": null,
+                        "source_submission_id": "string",
+                        "status": "string",
+                        "submissions": [
+                          {}
+                        ],
+                        "team_id": "string",
+                        "title": "string",
+                        "type": "string",
+                        "value_goal": "string",
+                        "workitem": {
+                          "BlockingIssuesCount": "string",
+                          "CompletedInBuildRuns": [
+                            {}
+                          ],
+                          "CreatedBy_Name": "string",
+                          "CreatedBy_Username": "string",
+                          "DependenciesClosedCount": "string",
+                          "DependenciesCount": "string",
+                          "Description": "string",
+                          "EffectiveAssetState": "string",
+                          "IsClosed": "string",
+                          "Name": "string",
+                          "Number": "string",
+                          "Status_Name": "string",
+                          "SuperBlockingIssuesCount": "string",
+                          "SuperClosedPWIsCount": "string",
+                          "SuperPWIsBlockingIssuesCount": "string",
+                          "SuperTotalPWIsCount": "string",
+                          "Team_Name": "string",
+                          "_oid": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Method": {
+                      "type": "string"
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                }
+              }
+            }
           }
         },
-        "description": "Gets the details of a specific workitem\n\nToDo: responses",
+        "description": "Gets the details of a specific workitem",
         "security": [
           {
             "ctm_token": []
           }
-        ],
-        "tags": [
-          "ToDo"
         ],
         "requestBody": {
           "content": {
@@ -5352,10 +8626,27 @@
                 "required": [
                   "id"
                 ]
+              },
+              "examples": {
+                "Story": {
+                  "value": {
+                    "id": "S-01026"
+                  }
+                }
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "application/json"
+          }
+        ]
       }
     },
     "/get_workitem_deliverycategory": {
