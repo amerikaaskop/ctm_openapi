@@ -737,7 +737,149 @@
         "operationId": "post-add_team_user",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "Success": {
+                    "value": {
+                      "ErrorCode": "",
+                      "ErrorDetail": "",
+                      "ErrorMessage": "",
+                      "Method": "add_team_user",
+                      "Response": "Add operation successful."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "No Such Team": {
+                    "value": {
+                      "ErrorCode": "GetError",
+                      "ErrorDetail": "",
+                      "ErrorMessage": "Specified Team not found.",
+                      "Method": "add_team_user",
+                      "Response": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Method": {
+                      "type": "string"
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "Auth Failure": {
+                    "value": {
+                      "ErrorCode": "Unauthorized",
+                      "ErrorDetail": "",
+                      "ErrorMessage": "Authentication Failure",
+                      "Method": "",
+                      "Response": ""
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "description": "Only a 'Team Administrator' can manage Team membership.  If the credentials used for this API call are not a Team Administrator for the specified Team, the call will not succeed.",
@@ -772,7 +914,8 @@
                 ]
               }
             }
-          }
+          },
+          "description": ""
         }
       }
     },
@@ -782,10 +925,152 @@
         "operationId": "post-associate_commits_to_v1_workitem",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "Changes Updated": {
+                    "value": {
+                      "ErrorCode": "",
+                      "ErrorDetail": "",
+                      "ErrorMessage": "",
+                      "Method": "associate_commits_to_v1_workitem",
+                      "Response": "Successfully updated Changes [[u'603eaa74681078188b4a6d4f']] with Workitem [B-0114]"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "Missing Param": {
+                    "value": {
+                      "ErrorCode": "MissingParameter",
+                      "ErrorDetail": "Required parameter 'commit_shas' missing.",
+                      "ErrorMessage": "",
+                      "Method": "associate_commits_to_v1_workitem",
+                      "Response": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Method": {
+                      "type": "string"
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "ErrorCode": "Unauthorized",
+                      "ErrorDetail": "",
+                      "ErrorMessage": "Authentication Failure",
+                      "Method": "",
+                      "Response": ""
+                    }
+                  }
+                }
+              }
+            }
           }
         },
-        "description": "Associate commits to v1 workitem\n\nToDo: commit_shas data shape",
+        "description": "Associate commits to v1 workitem",
         "security": [
           {
             "ctm_token": []
@@ -798,10 +1083,13 @@
                 "type": "object",
                 "properties": {
                   "commit_shas": {
-                    "type": "string",
-                    "description": "a list of all the Changes to associate to a Workitem"
+                    "type": "array",
+                    "description": "a list of all the Changes to associate to a Workitem",
+                    "items": {
+                      "type": "string"
+                    }
                   },
-                  "associated_by": {
+                  "workitem_associated_by": {
                     "type": "string",
                     "description": "User that made the association in Digital.ai Agility"
                   },
@@ -816,17 +1104,17 @@
                 },
                 "required": [
                   "commit_shas",
-                  "associated_by",
+                  "workitem_associated_by",
                   "workitem_number",
                   "instance_url"
                 ]
               }
             }
-          }
+          },
+          "description": ""
         },
         "tags": [
-          "Internal",
-          "ToDo"
+          "Internal"
         ]
       }
     },
@@ -836,10 +1124,133 @@
         "operationId": "post-build_stream",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "array",
+                      "items": {
+                        "required": [],
+                        "properties": {}
+                      }
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorMessage": {
+                      "type": "string"
+                    },
+                    "Method": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                },
+                "examples": {
+                  "Param Missing": {
+                    "value": {
+                      "ErrorCode": "MissingParameter",
+                      "ErrorDetail": "Required parameter 'number' missing.",
+                      "ErrorMessage": "",
+                      "Method": "build_stream",
+                      "Response": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "ErrorCode": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "ErrorDetail": {
+                      "type": "string"
+                    },
+                    "ErrorMessage": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "Method": {
+                      "type": "string"
+                    },
+                    "Response": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ErrorCode",
+                    "ErrorDetail",
+                    "ErrorMessage",
+                    "Method",
+                    "Response"
+                  ]
+                }
+              }
+            }
           }
         },
-        "description": "Gets all pipeline instances that a workitem participated in\n\nReturns: Related Pipeline Instances.",
+        "description": "Gets all pipeline instances that a workitem participated in\n",
         "security": [
           {
             "ctm_token": []
@@ -5134,35 +5545,95 @@
       }
     },
     "/get_transformer_data_map_all_sync_log": {
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-get_transformer_data_map_all_sync_log"
-      },
       "post": {
-        "summary": "",
+        "summary": "Gets synchronization log records",
         "operationId": "post-get_transformer_data_map_all_sync_log",
         "responses": {
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "description": "Gets synchronization log records",
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The id of the data map whose logs will be returned"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Status value by which to filter returned records"
+                  },
+                  "gt_id": {
+                    "type": "integer",
+                    "description": "If provided, return only records whose IDs are greater than this value"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          },
+          "description": "Returns up to 50 syncronization log records.  Use `gt_id` to fetch additional \"pages\" of records"
+        },
+        "tags": [
+          "ToDo"
+        ]
       }
     },
     "/get_transformer_data_map_sync_log_by_inbound": {
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-get_transformer_data_map_sync_log_by_inbound"
-      },
       "post": {
-        "summary": "",
+        "summary": "Gets synchronization log records for specific inbound event",
         "operationId": "post-get_transformer_data_map_sync_log_by_inbound",
         "responses": {
           "200": {
             "description": "OK"
+          }
+        },
+        "description": "Gets synchronization log records for specific inbound event\n\nToDo: responses",
+        "tags": [
+          "ToDo"
+        ],
+        "security": [
+          {
+            "ctm_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The id of the data map whose logs will be returned"
+                  },
+                  "inbound_id": {
+                    "type": "string",
+                    "description": "The inbound event id whose logs will be returned"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Status value by which to filter returned records"
+                  }
+                },
+                "required": [
+                  "id",
+                  "inbound_id"
+                ]
+              }
+            }
           }
         }
       }
